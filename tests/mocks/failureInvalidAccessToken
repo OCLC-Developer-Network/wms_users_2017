@@ -1,0 +1,43 @@
+
+-
+    request:
+        method: GET
+        url: 'https://worldcat.org/bib/data/70775700?classificationScheme=LibraryOfCongress&holdingLibraryCode=MAIN'
+        headers:
+            Host: worldcat.org
+            Accept-Encoding: null
+            Accept: application/atom+xml
+            User-Agent: 'GuzzleHttp/6.2.1 curl/7.45.0 PHP/7.0.13'
+            Authorization: 'Bearer tk_12345'
+    response:
+        status:
+            http_version: '1.1'
+            code: '401'
+            message: 'Unauthorized'
+        headers:
+            Server: Apache-Coyote/1.1
+            Content-Type: application/json;charset=ISO-8859-1
+            Content-Length: 153
+            Date: Tue, 16 May 2017 20:46:56 GMT
+        body: '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><error><code type="http">401</code><message>AccessToken {tk_12345} is invalid</message><detail>Authorization header: Bearer tk_12345</detail></error>'
+-
+    request:
+        method: GET
+        url: 'https://worldcat.org/bib/data/206732470?classificationScheme=LibraryOfCongress&holdingLibraryCode=MAIN'
+        headers:
+            Host: worldcat.org
+            Accept-Encoding: null
+            User-Agent: 'GuzzleHttp/6.2.1 curl/7.45.0 PHP/7.0.13'
+            Authorization: 'Bearer tk_12345'
+            Accept: 'application/atom+xml;content="application/vnd.oclc.marc21+xml"'
+    response:
+        status:
+            http_version: '1.1'
+            code: '401'
+            message: Unauthorized
+        headers:
+            Server: Apache-Coyote/1.1
+            Content-Type: application/xml;charset=ISO-8859-1
+            Transfer-Encoding: chunked
+            Date: 'Mon, 22 May 2017 00:46:12 GMT'
+        body: '<error><code type="http">401</code><message>AccessToken {tk_12345} is invalid</message><detail>Authorization header: Bearer tk_12345</detail></error>'
