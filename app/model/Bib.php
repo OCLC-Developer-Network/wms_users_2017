@@ -129,7 +129,7 @@ Class Bib {
 			$bib->record = $records->next();
 			return $bib;
 		} catch (RequestException $error) {
-			return Error::parseError($error);
+			return BibError::parseError($error);
 		}
 	}
 }
