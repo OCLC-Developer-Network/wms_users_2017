@@ -26,7 +26,7 @@ $container['config'] = function ($c) {
 };
 
 $container['wskey'] = function ($c) {
-	$services = array('WMS_COLLECTION_MANAGEMENT');
+	$services = array('WorldCatMetadataAPI');
 	$options = array('services' => $services);
 	return new WSKey($c->get("config")['prod']['wskey'], $c->get("config")['prod']['secret'], $options);
 };
@@ -58,7 +58,7 @@ $app->get('/', function ($request, $response, $args) {
 $app->post('/bib', function ($request, $response, $args) {
 	$accessToken = $this->get("wskey")->getAccessTokenWithClientCredentials($this->get("config")['prod']['institution'], $this->get("config")['prod']['institution'], $this->get("user"));
 	
-	$bib = new Bib($request->getParam('oclcnumber'), $accessToken->getValue());
+	$bib = Bib::find($request->getParam('oclcnumber'), $accessToken);
 	
 	if (is_a($bib, "Bib")){
 		
@@ -67,7 +67,7 @@ $app->post('/bib', function ($request, $response, $args) {
 		]);
 	}else {
 		return $this->view->render($response, 'error.html', [
-				'error' => $error,
+				'error' => $bib,
 				'oclcnumber' => $args['oclcnumber']
 		]);
 	}
@@ -77,7 +77,7 @@ $app->post('/bib', function ($request, $response, $args) {
 $app->get('/bib/{oclcnumber}', function ($request, $response, $args) {
 	$accessToken = $this->get("wskey")->getAccessTokenWithClientCredentials($this->get("config")['prod']['institution'], $this->get("config")['prod']['institution'], $this->get("user"));
 	
-	$bib = new Bib($args['oclcnumber'], $accessToken->getValue());
+	$bib = Bib::find($args['oclcnumber'], $accessToken);
 	
 	if (is_a($bib, "Bib")){
 	
@@ -86,7 +86,7 @@ $app->get('/bib/{oclcnumber}', function ($request, $response, $args) {
 		]);
 	}else {
 		return $this->view->render($response, 'error.html', [
-				'error' => $error,
+				'error' => $bib,
 				'oclcnumber' => $args['oclcnumber']
 		]);
 	}
