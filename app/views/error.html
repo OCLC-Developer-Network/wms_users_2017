@@ -1,5 +1,7 @@
 {% block content %}
-    Status - {{error.getStatus()}}
-    Message - {{error.getMessage()}}
+    Status - {{error}}
+    Message - {{error_message}}
+    {%if oclcnumber %}
     OCLC Number - {{oclcnumber}}
+    {% endif %}
 {% endblock %}

@@ -56,18 +56,27 @@ $app->get('/', function ($request, $response, $args) {
 
 //display bib route
 $app->post('/bib', function ($request, $response, $args) {
-	$accessToken = $this->get("wskey")->getAccessTokenWithClientCredentials($this->get("config")['prod']['institution'], $this->get("config")['prod']['institution'], $this->get("user"));
-	
-	$bib = Bib::find($request->getParam('oclcnumber'), $accessToken);
-	
-	if (is_a($bib, "Bib")){
+	try {
+		$accessToken = $this->get("wskey")->getAccessTokenWithClientCredentials($this->get("config")['prod']['institution'], $this->get("config")['prod']['institution'], $this->get("user"));
 		
-		return $this->view->render($response, 'bib.html', [
-				'bib' => $bib
-		]);
-	}else {
+		$bib = Bib::find($request->getParam('oclcnumber'), $accessToken);
+		
+		if (is_a($bib, "Bib")){
+			
+			return $this->view->render($response, 'bib.html', [
+					'bib' => $bib
+			]);
+		}else {
+			return $this->view->render($response, 'error.html', [
+					'error' => $bib->getStatus(),
+					'error_message' => $bib->getMessage(),
+					'oclcnumber' => $args['oclcnumber']
+			]);
+		}
+	} catch (Exception $error) {
 		return $this->view->render($response, 'error.html', [
-				'error' => $bib,
+				'error' => $error->getCode(),
+				'error_message' => $error->getMessage(),
 				'oclcnumber' => $args['oclcnumber']
 		]);
 	}
@@ -75,18 +84,27 @@ $app->post('/bib', function ($request, $response, $args) {
 
 //display bib route
 $app->get('/bib/{oclcnumber}', function ($request, $response, $args) {
-	$accessToken = $this->get("wskey")->getAccessTokenWithClientCredentials($this->get("config")['prod']['institution'], $this->get("config")['prod']['institution'], $this->get("user"));
-	
-	$bib = Bib::find($args['oclcnumber'], $accessToken);
-	
-	if (is_a($bib, "Bib")){
-	
-		return $this->view->render($response, 'bib.html', [
-				'bib' => $bib
-		]);
-	}else {
+	try {
+		$accessToken = $this->get("wskey")->getAccessTokenWithClientCredentials($this->get("config")['prod']['institution'], $this->get("config")['prod']['institution'], $this->get("user"));
+		
+		$bib = Bib::find($args['oclcnumber'], $accessToken);
+		
+		if (is_a($bib, "Bib")){
+		
+			return $this->view->render($response, 'bib.html', [
+					'bib' => $bib
+			]);
+		}else {
+			return $this->view->render($response, 'error.html', [
+					'error' => $bib->getStatus(),
+					'error_message' => $bib->getMessage(),
+					'oclcnumber' => $args['oclcnumber']
+			]);
+		}
+	} catch (Exception $error) {
 		return $this->view->render($response, 'error.html', [
-				'error' => $bib,
+				'error' => $error->getCode(),
+				'error_message' => $error->getMessage(),
 				'oclcnumber' => $args['oclcnumber']
 		]);
 	}
