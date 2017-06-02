@@ -55,6 +55,27 @@ $container['view'] = function ($container) {
 	return $view;
 };
 
+$auth_mw = function ($request, $response, $next) {
+	if ($request->getAttribute('route')->getArgument('oclcnumber')){
+		$oclcnumber = $request->getAttribute('route')->getArgument('oclcnumber');
+		$_SESSION['route'] = $this->get('router')->pathFor($request->getAttribute('route')->getName(), ['oclcnumber' => $oclcnumber]);
+	} elseif ($request->getParam('oclcnumber')) {
+		$oclcnumber = $request->getParam('oclcnumber');
+		$_SESSION['route'] = $this->get('router')->pathFor($request->getAttribute('route')->getName()) ."?" . http_build_query($request->getQueryParams());
+	} else {
+		$oclcnumber = null;
+		$_SESSION['route'] = $this->get('router')->pathFor($request->getAttribute('route')->getName());
+	}
+	
+	if (empty($_SESSION['accessToken']) || ($_SESSION['accessToken']->isExpired() && (empty($_SESSION['accessToken']->getRefreshToken()) || $_SESSION['accessToken']->isExpired()))){
+		$response = $response->withRedirect($this->get("wskey")->getLoginURL($this->get("config")['prod']['institution'], $this->get("config")['prod']['institution']));
+	} else {
+		$response = $next($request, $response);
+	}
+	
+	return $response;
+};
+
 // Add route callbacks
 //display form
 $app->get('/', function ($request, $response, $args) {
@@ -75,27 +96,21 @@ $app->get('/bib[/{oclcnumber}]', function ($request, $response, $args){
 				'error_message' => 'Sorry you did not pass in an OCLC Number'
 		]);
 	}
+	$bib = Bib::find($oclcnumber, $_SESSION['accessToken']);
 	
-	if (empty($_SESSION['accessToken']) || ($_SESSION['accessToken']->isExpired() && (empty($_SESSION['accessToken']->getRefreshToken()) || $_SESSION['accessToken']->isExpired()))){
-		return $response->withRedirect($this->get("wskey")->getLoginURL($this->get("config")['prod']['institution'], $this->get("config")['prod']['institution']));
-	} else {
+	if (is_a($bib, "Bib")){
 	
-		$bib = Bib::find($oclcnumber, $_SESSION['accessToken']);
-		
-		if (is_a($bib, "Bib")){
-		
-			return $this->view->render($response, 'bib.html', [
-					'bib' => $bib
-			]);
-		}else {
-			return $this->view->render($response, 'error.html', [
-					'error' => $bib->getStatus(),
-					'error_message' => $bib->getMessage(),
-					'oclcnumber' => $args['oclcnumber']
-			]);
-		}
+		return $this->view->render($response, 'bib.html', [
+				'bib' => $bib
+		]);
+	}else {
+		return $this->view->render($response, 'error.html', [
+				'error' => $bib->getStatus(),
+				'error_message' => $bib->getMessage(),
+				'oclcnumber' => $args['oclcnumber']
+		]);
 	}
-})->setName('display_bib');
+})->setName('display_bib')->add($auth_mw);
 
 $app->get('/catch_auth_code', function ($request, $response, $args) {
 	if ($request->getParam('code') && $_SESSION['route']){
