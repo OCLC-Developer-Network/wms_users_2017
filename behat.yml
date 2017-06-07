@@ -1,0 +1,14 @@
+# behat.yml     
+default:
+  suites:
+    default:
+      path: %paths.base%/features
+      contexts:
+        - FeatureContext
+        - Behat\MinkExtension\Context\MinkContext  
+  extensions:
+    Behat\MinkExtension:
+      base_url: http://localhost:9090/
+      sessions:
+        default:
+            goutte: ~           
