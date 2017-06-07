@@ -718,20 +718,20 @@
         },
         {
             "name": "twig/twig",
-            "version": "v1.33.2",
+            "version": "v1.34.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "dd6ca96227917e1e85b41c7c3cc6507b411e0927"
+                "reference": "5c0f990d446dda5d3b6ad644ed3c5eb2769d5a92"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/dd6ca96227917e1e85b41c7c3cc6507b411e0927",
-                "reference": "dd6ca96227917e1e85b41c7c3cc6507b411e0927",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/5c0f990d446dda5d3b6ad644ed3c5eb2769d5a92",
+                "reference": "5c0f990d446dda5d3b6ad644ed3c5eb2769d5a92",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.2.7"
+                "php": ">=5.3.3"
             },
             "require-dev": {
                 "psr/container": "^1.0",
@@ -741,12 +741,15 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.33-dev"
+                    "dev-master": "1.34-dev"
                 }
             },
             "autoload": {
                 "psr-0": {
                     "Twig_": "lib/"
+                },
+                "psr-4": {
+                    "Twig\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -776,7 +779,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2017-04-20 17:39:48"
+            "time": "2017-06-05 18:25:10"
         }
     ],
     "packages-dev": [
@@ -2716,7 +2719,7 @@
         },
         {
             "name": "symfony/browser-kit",
-            "version": "v3.3.0",
+            "version": "v3.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/browser-kit.git",
@@ -2773,16 +2776,16 @@
         },
         {
             "name": "symfony/class-loader",
-            "version": "v3.3.0",
+            "version": "v3.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/class-loader.git",
-                "reference": "b0aff75bf18e4bbf37209235227e6e50a5aec8f5"
+                "reference": "386a294d621576302e7cc36965d6ed53b8c73c4f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/class-loader/zipball/b0aff75bf18e4bbf37209235227e6e50a5aec8f5",
-                "reference": "b0aff75bf18e4bbf37209235227e6e50a5aec8f5",
+                "url": "https://api.github.com/repos/symfony/class-loader/zipball/386a294d621576302e7cc36965d6ed53b8c73c4f",
+                "reference": "386a294d621576302e7cc36965d6ed53b8c73c4f",
                 "shasum": ""
             },
             "require": {
@@ -2825,7 +2828,7 @@
             ],
             "description": "Symfony ClassLoader Component",
             "homepage": "https://symfony.com",
-            "time": "2017-04-12 14:14:56"
+            "time": "2017-06-02 09:51:43"
         },
         {
             "name": "symfony/config",
@@ -2948,7 +2951,7 @@
         },
         {
             "name": "symfony/css-selector",
-            "version": "v3.3.0",
+            "version": "v3.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/css-selector.git",
@@ -3001,16 +3004,16 @@
         },
         {
             "name": "symfony/debug",
-            "version": "v3.3.0",
+            "version": "v3.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/debug.git",
-                "reference": "ef5f19a7a68075a0bd05969a329ead3b0776fb7a"
+                "reference": "e9c50482841ef696e8fa1470d950a79c8921f45d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/debug/zipball/ef5f19a7a68075a0bd05969a329ead3b0776fb7a",
-                "reference": "ef5f19a7a68075a0bd05969a329ead3b0776fb7a",
+                "url": "https://api.github.com/repos/symfony/debug/zipball/e9c50482841ef696e8fa1470d950a79c8921f45d",
+                "reference": "e9c50482841ef696e8fa1470d950a79c8921f45d",
                 "shasum": ""
             },
             "require": {
@@ -3053,7 +3056,7 @@
             ],
             "description": "Symfony Debug Component",
             "homepage": "https://symfony.com",
-            "time": "2017-05-27 16:02:27"
+            "time": "2017-06-01 21:01:25"
         },
         {
             "name": "symfony/dependency-injection",
@@ -3117,7 +3120,7 @@
         },
         {
             "name": "symfony/dom-crawler",
-            "version": "v3.3.0",
+            "version": "v3.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dom-crawler.git",
@@ -3233,7 +3236,7 @@
         },
         {
             "name": "symfony/filesystem",
-            "version": "v3.3.0",
+            "version": "v3.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
