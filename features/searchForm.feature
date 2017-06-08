@@ -1,4 +1,4 @@
-Feature: View Search Format
+Feature: View Search Form
   As a library cataloger
   I want to view the search form
   so that search for an OCLC Number
