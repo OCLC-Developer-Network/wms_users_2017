@@ -1,7 +1,13 @@
+{% extends "layout.html" %}
+
+{% block title %}System Error{% endblock %}
 {% block content %}
-    Status - {{error}}
-    Message - {{error_message}}
+    <h1>System Error</h1>
+    <div id="error_content">
+    <p id="status">Status - {{error}}</p>
+    <p id="message">Message - {{error_description}}</p>
     {%if oclcnumber %}
-    OCLC Number - {{oclcnumber}}
+    <p id="oclcnumber">OCLC Number - {{oclcnumber}}</p>
     {% endif %}
+    </div>
 {% endblock %}

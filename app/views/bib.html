@@ -3,9 +3,9 @@
 {% block title %}{{bib.getTitle()}}{% endblock %}
 {% block content %}
 <h1>{{bib.getTitle()}}</h1>
-<div>
+<div id="record">
 <h4>Raw MARC</h4>
-<div>
+<div id="raw_record">
 <pre>
 {{bib.getRecord()}}
 </pre>
