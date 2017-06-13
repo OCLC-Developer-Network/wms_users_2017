@@ -10,7 +10,8 @@ $container = $app->getContainer();
 // -----------------------------------------------------------------------------
 
 $container['config'] = function ($c) {
-	return Yaml::parse(file_get_contents(__DIR__ . '/config/config.yml'));
+	global $config_file;
+	return Yaml::parse($config_file);
 };
 
 $container['wskey'] = function ($c) {

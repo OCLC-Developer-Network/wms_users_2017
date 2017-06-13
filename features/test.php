@@ -8,7 +8,8 @@ require_once(__DIR__ . '/../vendor/autoload.php');
 session_start();
 
 // instantiate the App object
-
+global $config_file; 
+$config_file = file_get_contents(__DIR__ . '/../app/config/test_config.yml');
 $config = require __DIR__ . '/../app/settings.php';
 
 $app = new \Slim\App($config);

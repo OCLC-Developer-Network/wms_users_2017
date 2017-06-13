@@ -1,0 +1,4 @@
+prod:
+    wskey: test
+    secret: secret
+    institution: 128807
