@@ -11,4 +11,4 @@ default:
       base_url: http://localhost:9090/
       sessions:
         default:
-            goutte: ~           
+            goutte: ~

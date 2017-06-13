@@ -3,39 +3,17 @@ use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use Behat\Behat\Hook\Scope\AfterScenarioScope;
 use Behat\Behat\Hook\Scope\AfterStepScope;
 use Behat\Behat\Context\Context;
+use Behat\Behat\Context\SnippetAcceptingContext;
+use Behat\MinkExtension\Context\RawMinkContext;
+use OCLC\Auth\AccessToken;
 
 use PHPUnit_Framework_Assert as Assert;
-
-\VCR\VCR::turnOn();
-\VCR\VCR::configure()->setCassettePath(__DIR__ . '/../mocks');
-\VCR\VCR::configure()->enableRequestMatchers(array('method', 'url', 'host'));
 
 /**
  * Features context.
  */
-class FeatureContext implements Context
+class FeatureContext extends RawMinkContext implements Context
 {
-	
-	/** @BeforeScenario */
-	public function createMock(BeforeScenarioScope $scope)
-	{
-		$tags = $scope->getScenario()->getTags();
-		//find tags that start vcr_
-		$mocks = array_filter($tags, function($tag)
-		{
-			return(strpos($tag, 'vcr_'));
-		});
-		if ($mocks){
-			//load that cassette
-			\VCR\VCR::insertCassette($mocks[0]);
-		}
-	}
-	
-	/** @AfterScenario */
-	public function teardownMock(AfterScenarioScope $scope)
-	{
-		\VCR\VCR::eject();
-	}
 	
 	/** @AfterStep */
 	public function errors(AfterStepScope $scope)
@@ -52,6 +30,21 @@ class FeatureContext implements Context
      */
     public function __construct()
     {
+    	
+    }
+    
+    /**
+     * @Given I am authenticated
+     */
+    public function iAmAuthenticated(){
+    	
+    }
+    
+    /**
+     * @Given I am not following redirects
+     */
+    public function iAmNotFollowingRedirects(){
+    	$this->getSession()->getDriver()->getClient()->followRedirects(false);
     }
 
     /**
@@ -81,6 +74,55 @@ class FeatureContext implements Context
         //it should have the attribute selected and it should be set to selected
         assertTrue($optionElement->hasAttribute("selected"));
         assertTrue($optionElement->getAttribute("selected") == "selected");
+    }
+    
+    /**
+     * @Then /^the current url should be "([^"]*)"$/
+     */
+    public function theCurrentURLShouldBe($url)
+    {
+    	$response_url = $this->getSession()->getCurrentUrl();
+    	Assert::assertEquals($url, $response_url);
+    }
+    
+    /**
+     * @Then /^the response is a redirect$/
+     */
+    public function theResponseIsARedirect()
+    {
+    	Assert::assertEquals($this->getSession()->getStatusCode(), "302");
+    }
+    
+    /**
+     * @Then /^the response has a header "([^"]*)" with a value of "([^"]*)"$/
+     */
+    public function theResponseHasHeaderWithValue($header, $value)
+    {
+    	$headers = $this->getSession()->getResponseHeaders();
+    	Assert::assertEquals($headers['Location'][0], $value);
+    }
+    
+    /**
+     * @Then /^the response has a parameter "([^"]*)"$/
+     */
+    public function theResponseHasAParameter($parameterName)
+    {
+    	$parsed_response_url = parse_url($this->getSession()->getCurrentUrl());
+    	parse_str($parsedUrl['query'], $responseParameters);
+    	
+    	Assert::assertArrayHasKey($parameterName, $responseParameters);
+    }
+    
+    /**
+     * @Then /^the "([^"]*)" parameter equals "([^"]*)"$/
+     */
+    public function theParameterEquals($parameterName, $parameterValue)
+    {
+    	$parsed_response_url = parse_url($this->getSession()->getCurrentUrl());
+    	parse_str($parsedUrl['query'], $responseParameters);
+    	
+    	$parameterValue = $this->replacePlaceHolder($parameterValue);
+    	Assert::assertEquals($parameterValue, $responseParameters[$parameterName]);
     }
     
     private static function showError($session) {
