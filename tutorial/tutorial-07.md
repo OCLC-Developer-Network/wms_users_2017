@@ -1,4 +1,5 @@
-# OCLC DEVCONNECT 2017 Demonstration Application: Tutorial Part 7
+# OCLC DEVCONNECT 2017 Demonstration Application
+## Tutorial Part 7
 
 7.	Configuration
 a.	Storing WSKey credentials

@@ -1,4 +1,5 @@
-# OCLC DEVCONNECT 2017 Demonstration Application: Tutorial Part 6
+# OCLC DEVCONNECT 2017 Demonstration Application
+## Tutorial Part 6
 
 6.	Model
 a.	Identify resources you need to work with, what actions you need to perform on them

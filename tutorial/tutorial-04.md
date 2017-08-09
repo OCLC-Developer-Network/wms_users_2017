@@ -1,4 +1,5 @@
-# OCLC DEVCONNECT 2017 Demonstration Application: Tutorial Part 4
+# OCLC DEVCONNECT 2017 Demonstration Application
+## Tutorial Part 4
 
 4.	Install dependencies
 a.	Install composer

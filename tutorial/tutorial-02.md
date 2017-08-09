@@ -1,4 +1,5 @@
-# OCLC DEVCONNECT 2017 Demonstration Application: Tutorial Part 2
+# OCLC DEVCONNECT 2017 Demonstration Application
+## Tutorial Part 2
 
-2.	Development environment
-a.	MAMP/WAMP/Bitnami
+1. Development environment
+	1. MAMP/WAMP/Bitnami
