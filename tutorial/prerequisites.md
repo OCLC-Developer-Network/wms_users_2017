@@ -1,4 +1,5 @@
-Prerequisites
+# OCLC DEVCONNECT 2017 Demonstration Application: Prerequisites
+
 1.	GitHub/Bitbucket account
 2.	Install web server (whichever we decide) / PHP
 a.	Install Bitnami with PHP 7
