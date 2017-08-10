@@ -1,7 +1,7 @@
 # OCLC DEVCONNECT 2017 Demonstration Application
 ## Tutorial Part 9
 
-9.	Views
-a.	How they are nested
-b.	Overall site template
-c.	Search form (no dynamic content)
+1. Views
+	1. How they are nested
+	2. Overall site template
+	3. Search form (no dynamic content)

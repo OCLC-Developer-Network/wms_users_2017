@@ -1,9 +1,9 @@
 # OCLC DEVCONNECT 2017 Demonstration Application
 ## Tutorial Part 4
 
-4.	Install dependencies
-a.	Install composer
-b.	Set up composer file
-c.	Install dependencies
-d.	.gitignore the vendor directory
-e.	commit the composer file
+1. Install dependencies
+	1. Install composer
+	2. Set up composer file
+	3. Install dependencies
+	4. .gitignore the vendor directory
+	5. commit the composer file

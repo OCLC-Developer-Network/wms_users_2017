@@ -1,17 +1,17 @@
 # OCLC DEVCONNECT 2017 Demonstration Application
 ## Tutorial Part 6
 
-6.	Model
-a.	Identify resources you need to work with, what actions you need to perform on them
-b.	Writing tests first – test driven development
-i.	E.g. bibtest.php before bib.php
-ii.	Assures that code is testable
-iii.	Mocks – just download to X directory
-c.	Make a class for each resource, each action is a method
-i.	E.g. getTitle
-d.	Classes: bib, biberror
-i.	Static method find – why treating this like constructor?
-ii.	Why avoiding overloading the constructor
-iii.	All the HTTP stuff (slides)
-e.	Authentication
-i.	CCG / Access Token
+1. Model
+	1. Identify resources you need to work with, what actions you need to perform on them
+	2. Writing tests first – test driven development
+		1. E.g. bibtest.php before bib.php
+		2. Assures that code is testable
+		3. Mocks – just download to X directory
+	3. Make a class for each resource, each action is a method
+		1. E.g. getTitle
+	4. Classes: bib, biberror
+		1. Static method find – why treating this like constructor?
+		2. Why avoiding overloading the constructor
+		3. All the HTTP stuff (slides)
+	5. Authentication
+		1. CCG / Access Token
