@@ -5,7 +5,6 @@ Feature: View Bib Record
   so that I can examine its properties
   
   Scenario: Successfully View Bib
-    Given I am on "/catch_auth_code?code=auth_12384794"
     When I go to "/bib/70775700"
     Then I should see "Dogs and cats" in the "div#content > h1" element
     And I should see "Raw MARC" in the "div#record > h4" element 

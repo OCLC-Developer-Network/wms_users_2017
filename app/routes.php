@@ -37,36 +37,3 @@ $app->get('/bib[/{oclcnumber}]', function ($request, $response, $args){
 		]);
 	}
 })->setName('display_bib')->add($auth_mw);
-
-$app->get('/catch_auth_code', function ($request, $response, $args) {
-	if (isset($_SESSION['route'])){
-		$route = $_SESSION['route'];
-	} else {
-		$route = '/';
-	}
-	
-	if ($request->getParam('code')){
-		try{
-			$_SESSION['accessToken'] = $this->get("wskey")->getAccessTokenWithAuthCode($request->getParam('code'), $this->get("config")['prod']['institution'], $this->get("config")['prod']['institution']);
-			return $response->withRedirect($route);
-		} catch(Exception $e) {
-			$this->logger->addInfo("Request for Access Token failed " . $e->getMessage());
-			return $this->view->render($response, 'error.html', [
-					'error' => $e->getMessage()
-			]);
-		}
-	}elseif ($request->getParam('error')){
-		$this->logger->addInfo("Request for Access Token failed " . $request->getParam('error') . " " . $request->getParam('error_description'));
-		return $this->view->render($response, 'error.html', [
-				'error' => $request->getParam('error'),
-				'error_description' => $request->getParam('error_description')
-		]);
-	}else {
-		return $response->withRedirect($route);
-	}
-})->setName('catch_auth_code');
-
-$app->get('/logoff', function ($request, $response, $args) {
-	$this->session->destroy();
-	return $response->withRedirect('/');
-})->setName('logoff');
