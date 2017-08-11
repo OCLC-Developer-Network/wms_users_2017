@@ -14,6 +14,13 @@ $container['config'] = function ($c) {
 	return Yaml::parse($config_file);
 };
 
+$container['logger'] = function($c) {
+	$logger = new \Monolog\Logger('my_logger');
+	$file_handler = new \Monolog\Handler\StreamHandler("../logs/app.log");
+	$logger->pushHandler($file_handler);
+	return $logger;
+};
+
 $container['wskey'] = function ($c) {
 	if (isset($_SERVER['HTTPS'])):
 	$redirect_uri = 'https://' . $_SERVER['HTTP_HOST'] . "/catch_auth_code";

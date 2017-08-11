@@ -1,12 +1,58 @@
 <?php
+/**
+ * Copyright 2013 OCLC
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * 
+ * @copyright Copyright (c) 2017 OCLC
+ * @license http://www.opensource.org/licenses/Apache-2.0
+ * @author Karen A. Coombs <coombsk@oclc.org>
+*/
+
+/**
+ * A class that represents a Bibliographic record.
+ * The Bib has id, and record.
+ *
+ */
 use GuzzleHttp\Client, GuzzleHttp\Exception\RequestException, GuzzleHttp\Psr7\Response;
 
 Class Bib {	
+	
+	/**
+	 * serviceUrl
+	 * @var string
+	 */
 	public static $serviceUrl = 'https://worldcat.org/bib/data/';
+	
+	/**
+	 * testServer
+	 * @var string
+	 */
 	public static $testServer = FALSE;
+	
+	/**
+	 * userAgent
+	 * @var string
+	 */
 	public static $userAgent = 'OCLC DevConnect demo';
 	
+	/**
+	 * id
+	 * @var string
+	 */
 	protected $id;
+	
+	/**
+	 * recod
+	 * @var File_MARC_Record
+	 */
 	protected $record;
 	
 	/**

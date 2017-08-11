@@ -15,6 +15,7 @@ $app->get('/bib[/{oclcnumber}]', function ($request, $response, $args){
 		$oclcnumber = $request->getParam('oclcnumber');
 		$_SESSION['route'] = $this->get('router')->pathFor($request->getAttribute('route')->getName()) ."?" . http_build_query($request->getQueryParams());
 	} else {
+		$this->logger->addInfo("No OCLC Number present");
 		return $this->view->render($response, 'error.html', [
 				'error' => 'No OCLC Number present',
 				'error_message' => 'Sorry you did not pass in an OCLC Number'
@@ -28,6 +29,7 @@ $app->get('/bib[/{oclcnumber}]', function ($request, $response, $args){
 				'bib' => $bib
 		]);
 	}else {
+		$this->logger->addInfo("API Call failed " . $bib->getStatus() . " " . $bib->getMessage());
 		return $this->view->render($response, 'error.html', [
 				'error' => $bib->getStatus(),
 				'error_message' => $bib->getMessage(),
@@ -48,11 +50,13 @@ $app->get('/catch_auth_code', function ($request, $response, $args) {
 			$_SESSION['accessToken'] = $this->get("wskey")->getAccessTokenWithAuthCode($request->getParam('code'), $this->get("config")['prod']['institution'], $this->get("config")['prod']['institution']);
 			return $response->withRedirect($route);
 		} catch(Exception $e) {
+			$this->logger->addInfo("Request for Access Token failed " . $e->getMessage());
 			return $this->view->render($response, 'error.html', [
 					'error' => $e->getMessage()
 			]);
 		}
 	}elseif ($request->getParam('error')){
+		$this->logger->addInfo("Request for Access Token failed " . $request->getParam('error') . " " . $request->getParam('error_description'));
 		return $this->view->render($response, 'error.html', [
 				'error' => $request->getParam('error'),
 				'error_description' => $request->getParam('error_description')
