@@ -1,5 +1,6 @@
-# OCLC DEVCONNECT 2017 Demonstration Application
-## Tutorial Part 1
+# A Beginner's Guide to Working with WorldShare APIs
+## OCLC WMS Global Community + User Group Meeting 2017: Pre-Conference Workshop
+### Tutorial Part 1
 
 1. Description of what we’re going to build
 	1. What kind of tools/dependencies are we going to need to build this?

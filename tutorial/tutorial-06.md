@@ -1,5 +1,6 @@
-# OCLC DEVCONNECT 2017 Demonstration Application
-## Tutorial Part 6
+# A Beginner's Guide to Working with WorldShare APIs
+## OCLC WMS Global Community + User Group Meeting 2017: Pre-Conference Workshop
+### Tutorial Part 6
 
 1. Model
 	1. Identify resources you need to work with, what actions you need to perform on them
