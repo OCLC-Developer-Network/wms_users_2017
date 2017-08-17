@@ -17,16 +17,16 @@ Please note that you will need a laptop on which you have administrator privileg
 	* [Linux](https://bitnami.com/stack/lamp)
 6. Enable XDebug for your Bitnami PHP installation.
 	1. Open php.ini (in the /installation_directory/php/etc directory) in a text editor.
-	2. Uncomment the following lines by removing the leading semicolon:
-	```
-	;zend_extension="/Applications/mampstack-7.1.7-0/php/lib/php/extensions/xdebug.so"
-	;xdebug.remote_enable=true
-	;xdebug.remote_host=127.0.0.1
-	;xdebug.remote_port=9000
-	;xdebug.remote_handler=dbgp
-	;xdebug.profiler_enable=1
-	;xdebug.profiler_output_dir=/tmp
-	```
+	2. Uncomment the following lines by removing the leading semicolons:
+		```
+		;zend_extension="/Applications/mampstack-7.1.7-0/php/lib/php/extensions/xdebug.so"
+		;xdebug.remote_enable=true
+		;xdebug.remote_host=127.0.0.1
+		;xdebug.remote_port=9000
+		;xdebug.remote_handler=dbgp
+		;xdebug.profiler_enable=1
+		;xdebug.profiler_output_dir=/tmp
+		```
 	3. Save the file.
 7. Add the Bitnami PHP directory (/installation_directory/php/bin) to your PATH system variable.
 	1. [Mac](https://stackoverflow.com/questions/30461201/how-do-i-edit-path-bash-profile-on-osx)
