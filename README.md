@@ -1,4 +1,4 @@
-OCLC DEVCONNECT 2017 Demonstration Application
+WMS User Group 2017 preconference 2017 Application
 =============
 This is a demonstration application written to how to interact with OCLC web service in PHP. It uses best programming practices like 
 - dependency management
@@ -16,8 +16,8 @@ In a Terminal Window
 
 ```bash
 $ cd {yourGitHomeDirectory}
-$ git clone https://github.com/OCLC-Developer-Network/oclcDevConnect2017.git
-$ cd oclcDevConnect2017
+$ git clone https://github.com/OCLC-Developer-Network/wms_users_2017.git
+$ cd wms_users_2017
 ```
 
 ### Step 2: Use composer to install the dependencies
