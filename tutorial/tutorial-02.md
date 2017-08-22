@@ -1,6 +1,6 @@
 # A Beginner's Guide to Working with WorldShare APIs
 ## OCLC WMS Global Community + User Group Meeting 2017: Pre-Conference Workshop
-### Tutorial Part 2
+### Tutorial Part 2 - Setting Up Your Project
 
 1. Since we're using Bitnami as our local development stack, we need to create a directory for our project files in a place where Bitnami's web server can find them.
 	1. In a terminal window, change into the directory where Bitnami will look for your project files.

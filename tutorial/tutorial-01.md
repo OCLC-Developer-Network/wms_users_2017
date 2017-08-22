@@ -1,6 +1,6 @@
 # A Beginner's Guide to Working with WorldShare APIs
 ## OCLC WMS Global Community + User Group Meeting 2017: Pre-Conference Workshop
-### Tutorial Part 1
+### Tutorial Part 1 - Project Overview
 
 1. What we're going to build.
 	* We're going to build a simple web application that allows you to search WorldCat bibliographic records by OCLC number and display selected metadata from the record.
