@@ -39,6 +39,8 @@ $ vi app/config/config.yml
 Edit the following values
 - wskey
 - secret
+- principalID
+- principalIDNS
 - institution
 
 
@@ -73,4 +75,8 @@ $ php -S localhost:9090 features/test.php
 ```bash
 $ vendor/bin behat
 ```
+
+## How this was built
+
+For a step by step tutorial on this application see the [tutorial section] (https://github.com/OCLC-Developer-Network/wms_users_2017/tree/master/tutorial)
 
