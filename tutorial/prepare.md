@@ -32,6 +32,7 @@ Please note that you will need a laptop on which you have administrator privileg
 	1. [Mac](https://stackoverflow.com/questions/30461201/how-do-i-edit-path-bash-profile-on-osx)
 	2. [Windows](https://www.howtogeek.com/118594/how-to-edit-your-system-path-for-easy-command-line-access/)
 	3. Linux (you probably already know what you're doing :wink:)
-8. Let us know if you have any questions at [devnet@oclc.org](mailto:devnet@oclc.org). We're happy to help you get set up.
+8. Make sure you have a **text editor** installed for writing code. Some of our favorites include Sublime Text (Mac) and NotePad++ (Windows).
+9. Let us know if you have any questions at [devnet@oclc.org](mailto:devnet@oclc.org). We're happy to help you get set up.
 
 **When you've completed these steps, continue on to [Tutorial Part 1](tutorial-01.md)**
