@@ -37,12 +37,7 @@
                 'bib' => $bib
         ]);
     }else {
-        $this->logger->addInfo("API Call failed " . $bib->getStatus() . " " . $bib->getMessage());
-        return $this->view->render($response, 'error.html', [
-                'error' => $bib->getStatus(),
-                'error_message' => $bib->getMessage(),
-                'oclcnumber' => $args['oclcnumber']
-        ]);
+        // catch the error
     }
 ```
 
