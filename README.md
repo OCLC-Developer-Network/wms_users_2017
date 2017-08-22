@@ -78,5 +78,5 @@ $ vendor/bin behat
 
 ## How this was built
 
-For a step by step tutorial on this application see the [tutorial section] (https://github.com/OCLC-Developer-Network/wms_users_2017/tree/master/tutorial)
+For a step by step tutorial on this application see the [tutorial section](https://github.com/OCLC-Developer-Network/wms_users_2017/tree/master/tutorial)
 

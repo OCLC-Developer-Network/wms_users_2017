@@ -10,7 +10,8 @@
 	3. OCLC's [PHP Authentication Library](https://github.com/OCLC-Developer-Network/oclc-auth-php) to support web service authentication
 	4. Dependency management via [Composer](https://getcomposer.org/)
 	5. An external [PHP library for parsing MARC records](http://pear.php.net/package/File_MARC/redirected)
-	6. Behavior-driven testing via [Behat](http://behat.org/en/latest/)
-	7. Continuous integration testing via [Travis CI](https://travis-ci.org/)
+	6. Unit testing via [PHPUnit](https://phpunit.de/)
+	7. Behavior-driven testing via [Behat](http://behat.org/en/latest/)
+	8. Continuous integration testing via [Travis CI](https://travis-ci.org/)
 
-**If this piques your interest, read on for more!***
+**If this piques your interest, [read on for more](tutorial-02.md)!**
