@@ -3,7 +3,27 @@
 ### Tutorial Part 6
 
 1. Model
-	1. Identify resources you need to work with, what actions you need to perform on them
+	1. Test Driven Development (aka write the tests first) 
+	   1. In tests directory create a file named BibTest.php to test your Bib Class 
+	   2. Open BibTest.php and define the BibTest Class as extending PHPUnit_Framework_TestCase
+	   3. Create a setup function. This runs before every test case.
+	       a. Create mock Access Token object that returns a specific value
+	   4. Write for Test creating a Bib
+	   5. Test getting a Bib
+	       a. mocks
+	   6. Write test for getting values from Bib
+	   7. Write test for getting MarcRecord object
+	
+	2. Create the Bib Class
+	   1. In the app/model directory create a file named Bib.php to represent the Bib Class
+	   2. Open Bib.php and declare Bib class
+	   3. Create a constructor for the Bib class
+	   4. Create a static "find" function for the Bib
+	   5. Create function to retrieve Id
+       6. Create function to retrieve OCLCNumber
+       7. Create function to retrieve title
+       8. Create function to retrieve author
+	4. 
 	2. Writing tests first – test driven development
 		1. E.g. bibtest.php before bib.php
 		2. Assures that code is testable
