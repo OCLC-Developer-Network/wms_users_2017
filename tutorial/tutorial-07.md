@@ -154,7 +154,7 @@ In this case we're the application that anytime this function is called it shoul
 3. Create a variable called $auth_mw to hold the anonymous function which performs authentication.
 4. The function will take $request, $response, and $next parameters
 5. Retrieve an Access token and set the session variable named "accessToken" equal to it
-    a. Take the existing wskey object in your container and use the getAccessTokenWithClientCredentials method passing in:
+    1. Take the existing wskey object in your container and use the getAccessTokenWithClientCredentials method passing in:
     - institution from your config file as authenticating institution
     - institution from your config file as context institution
     - user from your container as the user

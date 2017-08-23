@@ -6,10 +6,10 @@
 1. Create a file called phpunit.xml
 2. Open phpunit.xml
 3. Configure how phpunit should run
-- set directory where tests live
-- specify logging of tests
-- specify what files are being tested
-- add listener for PHP_VCR to handle mocks
+    1. set directory where tests live
+    2. specify logging of tests
+    3. specify what files are being tested
+    4. add listener for PHP_VCR to handle mocks
 ```php
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit bootstrap="tests/bootstrap.php"
@@ -61,7 +61,7 @@
     class BibTest extends \PHPUnit_Framework_TestCase
 ```
 10. Create a setup function in the BibTest Class. This runs before every test case.
-    a. Create mock Access Token object that returns a specific value
+    1. Create mock Access Token object that returns a specific value
     ```php
         function setUp()
         {   
@@ -80,8 +80,8 @@
         }
     ```
 11. Write for Test creating a Bib
-    a. Create a new Bib object
-    b. Test that it is an instance of a Bib object
+    1. Create a new Bib object
+    2. Test that it is an instance of a Bib object
 ```php
     function testCreateBib(){
         $bib = new Bib();
@@ -89,10 +89,10 @@
     }
 ```
 12. Test getting a Bib
-    a. Tell tests what file to use for mocks
-    b. Find a Bib
-    c. Test that object returned is an instance of a Bib
-    d. Pass bib variable to next test
+    1. Tell tests what file to use for mocks
+    2. Find a Bib
+    3. Test that object returned is an instance of a Bib
+    4. Pass bib variable to next test
 ```php
     /**
      *@vcr bibSuccess
@@ -104,9 +104,9 @@
     }
 ```
 13. Write test for getting MarcRecord object
-    a. Make sure testGetBib passes
-    b. Test that getRecord method on bib object returns a File_MARC_Record
-    c. Pass bib variable to next test
+    1. Make sure testGetBib passes
+    2. Test that getRecord method on bib object returns a File_MARC_Record
+    3. Pass bib variable to next test
 ```php
     /**
      * can parse Single Bib string
@@ -120,11 +120,11 @@
 ```
     
 14. Write test for getting values from Bib
-    a. Make sure testParseMarc passes
-    b. Test that getID method on bib object returns a value of 70775700 
-    c. Test that getOCLCNumber method on bib object returns a value of ocm70775700
-    d. Test that getTitle method on bib object returns a value of Dogs and cats
-    e. Test that getAuthor method on bib object returns a value of Jenkins, Steve
+    1. Make sure testParseMarc passes
+    2. Test that getID method on bib object returns a value of 70775700 
+    3. Test that getOCLCNumber method on bib object returns a value of ocm70775700
+    4. Test that getTitle method on bib object returns a value of Dogs and cats
+    5. Test that getAuthor method on bib object returns a value of Jenkins, Steve
 ```php
     /**
      * can parse Single Copy string
@@ -169,16 +169,16 @@
     }
 ```   
 8. Create a static "find" function for the Bib
-    a. Make sure a a valid OCLC Number is passed in
-    b. Make sure a valid Access Token is passed in
-    c. Create a url for the request
-    d. Create an HTTP client
-    e. Create an array of headers
-    f. try to make the HTTP request
-        i. If successful
+    1. Make sure a a valid OCLC Number is passed in
+    2. Make sure a valid Access Token is passed in
+    3. Create a url for the request
+    4. Create an HTTP client
+    5. Create an array of headers
+    6. try to make the HTTP request
+        1. If successful
             1. Parse the response body XML
             2. Pull out MARC record string and use it to create a File_MARC_Record
-        ii. If fails
+        2. If fails
             1. Pass response off to BibError::parseError to handle
 ```php 
     public static function find($oclcnumber, $accessToken){
@@ -254,11 +254,11 @@
     }
 ```
 8. Create static function to parse Error
-    a. Create a new BibError object
-    b. Make sure response is not HTML
-    c. Parse the XML response
-    d. Extract key field: code, message, detail
-    e. Return BibError object
+    1. Create a new BibError object
+    2. Make sure response is not HTML
+    3. Parse the XML response
+    4. Extract key field: code, message, detail
+    5. Return BibError object
 ```php
    public static function parseError($error){ 
         $errorObject = new BibError();
