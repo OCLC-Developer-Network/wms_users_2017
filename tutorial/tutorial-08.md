@@ -3,7 +3,7 @@
 ### Tutorial Part 8
 
 #### Routes - Telling the App what to do
-Our application is supposed to have to "screens":
+Our application is supposed to have two "screens":
 - Search box
 - Display screen for a bibliographic record
 To make our application work we have to tell it what urls to use for those two screens. This requires a routes.php file
@@ -11,10 +11,10 @@ To make our application work we have to tell it what urls to use for those two s
 1. In the app directory, create a routes.php file
 2. Open the routes.php file
 3. Define the route for the search screen
-    a. Add the HTTP method which will be used
-    b. Add the "path"
-    c. Return the view you want the application to display in the response
-    d. Give the route a name
+    - Add the HTTP method which will be used
+    - Add the "path"
+    - Return the view you want the application to display in the response
+    - Give the route a name
 
 ```php
 //display form
@@ -27,6 +27,6 @@ $app->get('/', function ($request, $response, $args) {
 ```php
 //display bib route
 $app->get('/bib[/{oclcnumber}]', function ($request, $response, $args){
-
+    return $this->view->render($response, 'bib.html');
 })->setName('display_bib');
 ```
