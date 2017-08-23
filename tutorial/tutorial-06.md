@@ -3,27 +3,64 @@
 ### Tutorial Part 6
 
 #### Test Driven Development (aka write the tests first) 
-1. In tests directory create a file named bootstrap.php
-2. Require vendor autoload file
+1. Create a file called phpunit.xml
+2. Open phpunit.xml
+3. Configure how phpunit should run
+- set directory where tests live
+- specify logging of tests
+- specify what files are being tested
+- add listener for PHP_VCR to handle mocks
+```php
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit bootstrap="tests/bootstrap.php"
+         colors="true"
+         processIsolation="false"
+         stopOnFailure="false"
+         syntaxCheck="false"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         testSuiteLoaderClass="PHPUnit_Runner_StandardTestSuiteLoader">     
+    <testsuites>
+    <testsuite>
+      <directory>tests</directory>
+    </testsuite>
+  </testsuites>
+  <logging>
+    <log type="coverage-clover" target="clover.xml"/>
+    <log type="coverage-html" target="tests/codeCoverage" charset="UTF-8"/>
+  </logging>
+  <filter>
+    <whitelist>
+        <directory suffix=".php">app/model</directory>
+    </whitelist> 
+  </filter>  
+  <listeners>
+      <listener class="PHPUnit_Util_Log_VCR" file="vendor/php-vcr/phpunit-testlistener-vcr/PHPUnit/Util/Log/VCR.php" />
+    </listeners>
+  </phpunit>
+```
+4. In tests directory create a file named bootstrap.php
+5. Require vendor autoload file
 ```php
     require_once __DIR__ . '/../vendor/autoload.php';
 ```
-3. Setup HTTP mocking
+6. Setup HTTP mocking
 ```php
     \VCR\VCR::configure()->setCassettePath(__DIR__ . '/mocks');
     \VCR\VCR::configure()->enableRequestMatchers(array('method', 'url', 'host'));
 ```
-4. In tests directory create a file named BibTest.php to test your Bib Class 
-5. Open BibTest.php and add use statements for class you want to use (WSKey and Access Token)
+7. In tests directory create a file named BibTest.php to test your Bib Class 
+8. Open BibTest.php and add use statements for class you want to use (WSKey and Access Token)
 ```php
     use OCLC\Auth\WSKey;
     use OCLC\Auth\AccessToken;
 ``` 
-6. define the BibTest Class as extending PHPUnit_Framework_TestCase
+9. define the BibTest Class as extending PHPUnit_Framework_TestCase
 ```php
     class BibTest extends \PHPUnit_Framework_TestCase
 ```
-7. Create a setup function in the BibTest Class. This runs before every test case.
+10. Create a setup function in the BibTest Class. This runs before every test case.
     a. Create mock Access Token object that returns a specific value
     ```php
         function setUp()
@@ -42,7 +79,7 @@
             ->will($this->returnValue('tk_12345'));
         }
     ```
-8. Write for Test creating a Bib
+11. Write for Test creating a Bib
     a. Create a new Bib object
     b. Test that it is an instance of a Bib object
 ```php
@@ -51,7 +88,7 @@
         $this->assertInstanceOf('Bib', $bib);
     }
 ```
-9. Test getting a Bib
+12. Test getting a Bib
     a. Tell tests what file to use for mocks
     b. Find a Bib
     c. Test that object returned is an instance of a Bib
@@ -66,7 +103,7 @@
         return $bib;
     }
 ```
-10. Write test for getting MarcRecord object
+13. Write test for getting MarcRecord object
     a. Make sure testGetBib passes
     b. Test that getRecord method on bib object returns a File_MARC_Record
     c. Pass bib variable to next test
@@ -82,7 +119,7 @@
     }
 ```
     
-11. Write test for getting values from Bib
+14. Write test for getting values from Bib
     a. Make sure testParseMarc passes
     b. Test that getID method on bib object returns a value of 70775700 
     c. Test that getOCLCNumber method on bib object returns a value of ocm70775700
