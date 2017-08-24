@@ -1,0 +1,28 @@
+language: php
+# list any PHP version you want to test against
+php:
+# using major version aliases
+# aliased to a recent 5.6.x version
+- 5.6
+#alias to a recent 7.0.x version
+- 7.0
+
+install:
+    - composer install
+
+before_script:
+  - php -S localhost:9090 features/test.php &
+  - sleep 3
+
+# omitting "script:" will default to phpunit
+script: 
+    - vendor/bin/phpunit --configuration phpunit.xml
+    - vendor/bin/behat
+
+# configure notifications (email, IRC, campfire etc)
+notifications:
+    email:
+        recipients:
+        - coombsk@oclc.org
+        on_success: always
+        on_failure: always
