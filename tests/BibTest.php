@@ -33,6 +33,68 @@ class BibTest extends \PHPUnit_Framework_TestCase
 		->method('getValue')
 		->will($this->returnValue('tk_12345'));
 	}
+	
+	/**
+	 * Create Bib
+	 */
+	function testCreateBib(){
+	    $bib = new Bib();
+	    $this->assertInstanceOf('Bib', $bib);
+	    return $bib;
+	}
+	
+	/**
+	 * Set File_MARC_Record
+	 * @depends testCreateBib
+	 */
+	function testSetRecord($bib){
+	    $records = new File_MARCXML(file_get_contents(__DIR__ . '/mocks/marcRecord.xml'), File_MARC::SOURCE_STRING);
+	    $record = $records->next();
+	    $bib->setRecord($record);
+	    $this->assertAttributeInstanceOf("File_MARC_Record", 'record', $bib);
+	    return $bib;
+	}
+	
+	/**
+	 * Get Record
+	 * @depends testSetRecord
+	 */
+	function testGetRecord($bib){
+	    $this->assertInstanceOf("File_MARC_Record", $bib->getRecord());
+	    return $bib;
+	}
+	
+	/**
+	 * Get Id
+	 * @depends testGetRecord
+	 */
+	function testGetId($bib) {
+	    $this->assertEquals("70775700", $bib->getId());
+	}
+	
+	/**
+	 * Get OCLCNumber
+	 * @depends testGetRecord
+	 */
+	function testGetOCLCNumber($bib) {
+	    $this->assertEquals("ocm70775700", $bib->getOCLCNumber());
+	}
+	
+	/**
+	 * Get Title
+	 * @depends testGetRecord
+	 */
+	function testGetTitle($bib) {
+	    $this->assertEquals("Dogs and cats", $bib->getTitle());
+	}
+	
+	/**
+	 * Get Author
+	 * @depends testGetRecord
+	 */
+	function testGetAuthor($bib) {
+	    $this->assertEquals("Jenkins, Steve", $bib->getAuthor());
+	}
 
 	/**
 	 *@vcr bibSuccess
@@ -96,13 +158,6 @@ class BibTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals("American Medical Association", $bib->getAuthor());
 	}
 	
-	/**
-	 * Create Bib
-	 */
-	function testCreateBib(){
-		$bib = new Bib();
-		$this->assertInstanceOf('Bib', $bib);
-	}
 	
 	/**
 	 * @expectedException BadMethodCallException

@@ -50,7 +50,7 @@ Class Bib {
 	protected $id;
 	
 	/**
-	 * recod
+	 * record
 	 * @var File_MARC_Record
 	 */
 	protected $record;
@@ -61,11 +61,15 @@ Class Bib {
 	 */
 	public function getId()
 	{
-		if (isset($this->id)){
-			return $this->id;
-		} else {
-			return $this->record->getField('001')->getData();
+		if (empty($this->id)){
+		    if (is_numeric($this->record->getField('001')->getData())) {
+		        $this->id = $this->record->getField('001')->getData();
+		    } else {
+			 $this->id = substr($this->record->getField('001')->getData(), 3);
+		    }
+		    
 		}
+		return $this->id;
 	}
 	
 	/**
@@ -117,6 +121,17 @@ Class Bib {
 			$author= rtrim($author, '.');
 		}
 		return $author;
+	}
+	
+	/**
+	 * Setter for the record
+	 * 
+	 */
+	public function setRecord($record){
+	    if (!is_a($record, 'File_MARC_Record')) {
+	        Throw new \BadMethodCallException('You must pass a valid File_MARC_Record');
+	    }
+	    $this->record = $record;
 	}
 	
 	/**
