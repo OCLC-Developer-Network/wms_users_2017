@@ -1,6 +1,6 @@
 # A Beginner's Guide to Working with WorldShare APIs
 ## OCLC WMS Global Community + User Group Meeting 2017: Pre-Conference Workshop
-### Tutorial Part 6
+### Tutorial Part 6 - Creating Models
 
 #### Test Driven Development (aka write the tests first) 
 1. Create a file called phpunit.xml

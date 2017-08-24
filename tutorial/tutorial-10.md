@@ -1,6 +1,6 @@
 # A Beginner's Guide to Working with WorldShare APIs
 ## OCLC WMS Global Community + User Group Meeting 2017: Pre-Conference Workshop
-### Tutorial Part 10
+### Tutorial Part 10 - Route using a Model 
 
 #### Displaying the Bibliographic Record
 In order to display the actual bibliographic data we have to retrieve it from the API and pass it to our view.

@@ -1,6 +1,6 @@
 # A Beginner's Guide to Working with WorldShare APIs
 ## OCLC WMS Global Community + User Group Meeting 2017: Pre-Conference Workshop
-### Tutorial Part 9
+### Tutorial Part 9 - Views
 Views govern how content will be displayed on the screen. 
 One view can be extended by another view allowing the layout to be controlled by a single file
 Data can be passed into a view for display purposes. More on this later.
