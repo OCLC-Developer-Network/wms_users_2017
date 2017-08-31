@@ -5,7 +5,7 @@
 Please note that you will need a laptop on which you have administrator privileges in order to complete this workshop.
 
 1. Create a [GitHub account](https://github.com/).
-2. Create a [WorldCat.org account](https://www.oclc.org/en/user/create-account.html).
+2. Create a [WorldCat.org account](https://worldcat.org/config/CreateAccountWizard.do).
 3. Send us your WorldCat.org account username via email. We will use this information to create a WSKey for you to use in the workshop.
 	* To: [devnet@oclc.org](mailto:devnet@oclc.org)
 	* Subject: WMS API Workshop WSKey
