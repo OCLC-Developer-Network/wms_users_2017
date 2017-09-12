@@ -188,12 +188,7 @@
             Throw new \BadMethodCallException('You must pass a valid Access Token');
         }
         $url = static::$serviceUrl . $oclcnumber . '?classificationScheme=LibraryOfCongress&holdingLibraryCode=MAIN';
-        $client = new Client(
-                [
-                        'curl' => [
-                                CURLOPT_SSLVERSION => '3'
-                        ]]
-                );
+        $client = new Client();
         $headers = array();
         $headers['Authorization'] = 'Bearer ' . $accessToken->getValue();
         $headers['Accept'] = 'application/atom+xml;content="application/vnd.oclc.marc21+xml"';
