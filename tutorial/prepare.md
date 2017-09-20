@@ -37,4 +37,4 @@ Please note that you will need a laptop on which you have administrator privileg
 8. Make sure you have a **text editor** installed for writing code. Some of our favorites include Sublime Text (Mac) and NotePad++ (Windows).
 9. Let us know if you have any questions at [devnet@oclc.org](mailto:devnet@oclc.org). We're happy to help you get set up.
 
-**When you've completed these steps, continue on to [Tutorial Part 1](tutorial-01.md)**
+**[on to Part 1](tutorial-01.md)**

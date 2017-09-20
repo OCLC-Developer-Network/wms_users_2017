@@ -36,3 +36,6 @@ $container['logger'] = function($c) {
 ```php
     $this->logger->addInfo("API Call failed " . $bib->getStatus() . " " . $bib->getMessage());
 ```
+
+**[on to Part 12](tutorial-12.md)**
+**[back to Part 10](tutorial-10.md)**

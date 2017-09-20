@@ -36,5 +36,5 @@
 12. Push your changes to your remote repository:
 	1. `$ git push origin master`
 
-
-**Once you've confirmed that your changes were successfully committed and pushed, move on to [Tutorial Part 4](tutorial-04.md).**
+**[on to Part 4](tutorial-04.md)**
+**[back to Part 2](tutorial-02.md)**

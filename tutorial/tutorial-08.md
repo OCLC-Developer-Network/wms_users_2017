@@ -71,3 +71,6 @@ The record
 </div>
 {% endblock %}
 ```
+
+**[on to Part 9](tutorial-09.md)**
+**[back to Part 7](tutorial-07.md)**

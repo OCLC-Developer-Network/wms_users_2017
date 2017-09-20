@@ -5,17 +5,16 @@
 1. We're going to use git to control versioning of our code, and host our code repositories on GitHub. First, create an empty repository on [github.com](https://github.com/) for your code.
 	1. Click "New repository"
 	2. Title your repository "wms_users_2017"
-	3. Check the box next to "Initialize this repository with a README
+	3. Check the box next to "Initialize this repository with a README"
 	4. Click "Create repository"
 2. In a terminal window, change into the following directory:
 ```bash
 $ cd /your-bitnami-installation-directory/apache2/htdocs
 ```
-3. Enter this command to clone the repository you just created:
+3. Enter this command to clone the repository you just created, substituting your GitHub username for `your-github-username`:
 ```bash
 $ git clone https://github.com/your-github-username/wms_users_2017.git
 ```
-substituting your GitHub username for your-github-username.
 4. You should now have a subdirectory called `wms_users_2017` with an empty README.md file in it.
 ```bash
 $ cd wms_users_2017/
@@ -31,7 +30,6 @@ README.md
 	```
 	You should see output like this:
 	```bash
-	swayh-1mbadu:wms-test-1 swayh$ git status
 	On branch master
 	Your branch is up-to-date with 'origin/master'.
 	Changes not staged for commit:
@@ -54,4 +52,5 @@ README.md
 	```
 	7. In your browser, head back to your GitHub repository at https://github.com/your-github-username/wms_users_2017, and you should see the changes you just made to your README file.
 
-**Once you've confirmed that you can push to the GitHub repository you just created, move on to [Tutorial Part 3](tutorial-03.md).**
+**[on to Part 3](tutorial-03.md)**
+**[back to Part 1](tutorial-01.md)**

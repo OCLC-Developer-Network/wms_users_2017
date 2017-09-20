@@ -166,3 +166,7 @@ $auth_mw = function ($request, $response, $next) {
     $response = $next($request, $response);
     return $response;
 };
+```
+
+**[on to Part 7](tutorial-07.md)**
+**[back to Part 5](tutorial-05.md)**

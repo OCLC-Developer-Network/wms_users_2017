@@ -5,3 +5,6 @@
 1. Structure of MVC – project organization
 	1. Tests directory
 	2. App directory – MVC components
+
+**[on to Part 5](tutorial-05.md)**
+**[back to Part 3](tutorial-03.md)**

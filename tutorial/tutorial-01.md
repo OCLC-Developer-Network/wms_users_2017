@@ -14,4 +14,5 @@
 	7. Behavior-driven testing via [Behat](http://behat.org/en/latest/)
 	8. Continuous integration testing via [Travis CI](https://travis-ci.org/)
 
-**If this piques your interest, [read on for more](tutorial-02.md)!**
+**[on to Part 2](tutorial-02.md)**
+**[back to Prepare](prepare.md)**
