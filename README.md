@@ -22,9 +22,20 @@ $ cd wms_users_2017
 
 ### Step 2: Use composer to install the dependencies
 
+Mac:
+
 ```bash
 $ curl -s https://getcomposer.org/installer | php
 $ php composer.phar install
+```
+
+Windows:
+
+1. Download and run [Composer-Setup.exe](https://getcomposer.org/doc/00-intro.md#installation-windows)
+2. Run this command in your wms_users_2017 directory
+
+```bash
+$ composer install
 ```
 
 [Composer](https://getcomposer.org/doc/00-intro.md) is a dependency management library for PHP. It is used to install the required libraries for testing and parsing RDF data. The dependencies are configured in the file `composer.json`.

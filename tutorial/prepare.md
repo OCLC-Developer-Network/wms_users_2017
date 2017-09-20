@@ -30,7 +30,9 @@ Please note that you will need a laptop on which you have administrator privileg
 	3. Save the file.
 7. Add the Bitnami PHP directory (/installation_directory/php/bin) to your PATH system variable.
 	1. [Mac](https://stackoverflow.com/questions/30461201/how-do-i-edit-path-bash-profile-on-osx)
+		1. Add /installation_directory/php/bin
 	2. [Windows](https://www.howtogeek.com/118594/how-to-edit-your-system-path-for-easy-command-line-access/)
+		1. Add C:\installation_directory\php
 	3. Linux (you probably already know what you're doing :wink:)
 8. Make sure you have a **text editor** installed for writing code. Some of our favorites include Sublime Text (Mac) and NotePad++ (Windows).
 9. Let us know if you have any questions at [devnet@oclc.org](mailto:devnet@oclc.org). We're happy to help you get set up.
