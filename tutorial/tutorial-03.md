@@ -8,17 +8,16 @@
 3. Open `composer.json` in your text editor.
 4. Copy and paste [this text](https://raw.githubusercontent.com/OCLC-Developer-Network/wms_users_2017/master/composer.json) into the file.
 5. Save the file.
-6. Mac users: 
-	1. In your terminal window, enter this command to download the Composer installer:
-	`$ curl -s https://getcomposer.org/installer | php`
-	2. Then enter this command to install the project dependencies:
-	`$ php composer.phar install`
-7. Windows users:
-	1. Download and run [Composer-Setup.exe](https://getcomposer.org/doc/00-intro.md#installation-windows)
-	2. Run this command in your wms_users_2017 directory
-	```bash
-	$ composer install
-	```
+6. Create the following directories:
+```bash
+$ mkdir app
+$ mkdir app/model
+$ mkdir tests
+```
+7. Run Composer to install your dependencies:
+```bash
+$ composer install
+```
 8. Now, we want to commit our `composer.json` file to our GitHub repository, but there is some prep we must do first. You'll notice that the command in the previous step created a `/vendor/` directory in your project that contains all of the external resources you installed. We do *not* want to put these files in version control.
 	1. To tell git to ignore the `/vendor/` directory, create a `.gitignore` file:
 		1. `$ touch .gitignore`
@@ -39,3 +38,17 @@
 **[on to Part 4](tutorial-04.md)**
 
 **[back to Part 2](tutorial-02.md)**
+
+Just in case you need to install Composer (you shouldn't, because it comes packaged with Bitnami), here are instructions:
+
+1. Mac users: 
+	1. In your terminal window, change into a directory in your PATH and enter this command to download the Composer installer:
+	`$ curl -s https://getcomposer.org/installer | php`
+	2. Then enter this command to install the project dependencies:
+	`$ php composer.phar install`
+2. Windows users:
+	1. Download and run [Composer-Setup.exe](https://getcomposer.org/doc/00-intro.md#installation-windows)
+	2. Run this command in your wms_users_2017 directory to install dependencies:
+	```bash
+	$ composer install
+	```
