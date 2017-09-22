@@ -53,4 +53,5 @@ README.md
 	7. In your browser, head back to your GitHub repository at https://github.com/your-github-username/wms_users_2017, and you should see the changes you just made to your README file.
 
 **[on to Part 3](tutorial-03.md)**
+
 **[back to Part 1](tutorial-01.md)**
