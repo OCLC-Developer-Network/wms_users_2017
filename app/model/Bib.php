@@ -185,7 +185,9 @@ Class Bib {
 			$bib->record = $records->next();
 			return $bib;
 		} catch (RequestException $error) {
-			return BibError::parseError($error);
+		    $bibError = new BibError();
+		    $bibError->setRequestError($error->getResponse());
+			return $bibError;
 		}
 	}
 }

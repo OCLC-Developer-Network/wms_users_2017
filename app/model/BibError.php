@@ -20,8 +20,15 @@
  * A class that represents an Error
  *
  */
+use GuzzleHttp\Psr7\Response;
 class BibError
 {
+	/**
+	 * requestError
+	 * @var 
+	 */
+    protected $requestError;
+    
 	/**
 	 * code
 	 * @var string
@@ -40,6 +47,38 @@ class BibError
 	 */
 	protected $detail;
     
+	/**
+	 * Set Request Error
+	 *
+	 * @return HTTP Error
+	 */
+	function setRequestError($error)
+	{
+	    if (!is_a($error, 'GuzzleHttp\Psr7\Response')) {
+	        Throw new \BadMethodCallException('You must pass a valid Guzzle Http PSR7 Response');
+	    }
+	    $this->requestError = $error;
+	    if (implode($this->requestError->getHeader('Content-Type')) !== 'text/html;charset=utf-8'){
+	        $error_response = simplexml_load_string($this->requestError->getBody());
+	        $this->code = (integer) $error_response->code;
+	        $this->message = (string) $error_response->message;
+	        $this->detail = (string) $error_response->detail;
+	    } else {
+	        $errorObject->code = (integer) $this->requestError->getStatusCode();
+	    }
+	    
+	}
+	
+	/**
+	 * Get Request Error
+	 *
+	 * @return HTTP Error
+	 */
+	function getRequestError()
+	{
+	    return $this->requestError;
+	}
+	
     /**
      * Get Error Code
      *
@@ -69,26 +108,5 @@ class BibError
     {
         return $this->detail;
     }
-    
-    /**
-     * Parse the response body for the error information
-     * 
-     * @param string $error
-     * @return array Error
-     */
-    static function parseError($error){
-    	$errorObject = new BibError();
-    	if (implode($error->getResponse()->getHeader('Content-Type')) !== 'text/html;charset=utf-8'){
-			$error_response = simplexml_load_string($error->getResponse()->getBody());
-			$errorObject->code = (integer) $error_response->code;
-			$errorObject->message = (string) $error_response->message;
-			$errorObject->detail = (string) $error_response->detail;
-    	} else {
-    		$errorObject->code = (integer) $error->getResponse()->getStatusCode();
-    	}
-    	return $errorObject;
-    	
-    }
-    
     
 }
