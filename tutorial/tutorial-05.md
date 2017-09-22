@@ -178,7 +178,6 @@ vendor/bin/phpunit
 1. Write a test for getting a record
     1. Make sure testGetRecord passes
     2. Test getId method returns appropriate value.
-    3. Pass bib variable to next test
 ```php
     /**
      * Get Id
@@ -213,7 +212,6 @@ vendor/bin/phpunit
 1. Write a test for getting a record
     1. Make sure testGetRecord passes
     2. Test that getOCLCNumber method returns the appropriate value
-    3. Pass bib variable to next test
 ```php
     /**
      * Get OCLCNumber
@@ -242,7 +240,6 @@ vendor/bin/phpunit
 1. Write a test for getting a record
     1. Make sure testGetRecord passes
     2. Test that getTitle method returns appropriate value
-    3. Pass bib variable to next test
 ```php
     /**
      * Get Title
@@ -370,7 +367,9 @@ vendor/bin/phpunit
             $bib->record = $records->next();
             return $bib;
         } catch (RequestException $error) {
-            return BibError::parseError($error);
+            $bibError = new BibError();
+            $bibError->setRequestError($error->getResponse());
+            return $bibError;
         }
     }
 ```
@@ -426,60 +425,206 @@ vendor/bin/phpunit
 vendor/bin/phpunit
 ```       
 
-#### Create the BibError Class
-1. In the app/model directory create a file named BibError.php to represent the BibError Class
-2. Open BibError.php and declare BibError class
+#### Write the first test for the BibError Class
+1. In tests directory create a file named BibErrorTest.php to test your BibError Class 
+2. Open BibErrorTest.php and add use statements for class you want to use (WSKey and Access Token)
 ```php
-    class BibError {}
+    use OCLC\Auth\WSKey;
+    use OCLC\Auth\AccessToken;
+    use GuzzleHttp\Psr7\Response;
+``` 
+3. define the BibErrorTest Class as extending PHPUnit_Framework_TestCase
+```php
+    class BibErrorTest extends \PHPUnit_Framework_TestCase
 ```
-3. Create a constructor for the BibError class
+4. Create a setup function in the BibErrorTest Class. This runs before every test case.
+    1. Create mock Access Token object that returns a specific value
+    ```php
+        function setUp()
+        {   
+            $options = array(
+                    'authenticatingInstitutionId' => 128807,
+                    'contextInstitutionId' => 128807,
+                    'scope' => array('WorldCatMetadataAPI')
+            );
+            $this->mockAccessToken = $this->getMockBuilder(AccessToken::class)
+            ->setConstructorArgs(array('client_credentials', $options))
+            ->getMock();
+            
+            $this->mockAccessToken->expects($this->any())
+            ->method('getValue')
+            ->will($this->returnValue('tk_12345'));
+        }
+    ```
+5. Write for Test creating a BibError
+    1. Create a new BibError object
+    2. Test that it is an instance of a BibError object
 ```php
-    function __contruct() {}
-```
-4. Create necessary variables: code, message, detail
-```php
-    protected code;
-    protected message;
-    protected detail;
-```
-5. Create function to retrieve error code
-```php
-    function getCode() {
-        return $this->code;
+    function testCreateBibError(){
+        $error = new BibError();
+        $this->assertInstanceOf('BibError', $error);
     }
 ```
-6. Create function to retrieve error message
+6. Make the test pass by creating BibError class and constructor
+    1. In the app/model directory create a file named BibError.php to represent the BibError Class
+    2. Open BibError.php and declare BibError class
+    3. Create a constructor for the BibError class
+    ```php
+        function __contruct() {
+        }
+    ```   
+7. Run tests
+```bash
+vendor/bin/phpunit
+```
+
+#### Setting a Request Error 
+1. Create Test for setting a request error
 ```php
-    function getMessage() {
-        return $this->message;
+    /**
+     * Set Request Error
+     * @depends testCreateBibError
+     */
+    function testSetRequestError($error){
+        $request_error = new Response(401, [], '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><error><code type="http">401</code><message>AccessToken {tk_12345} is invalid</message><detail>Authorization header: Bearer tk_12345</detail></error>');
+        $error->setRequestError($request_error);
+        $this->assertAttributeInstanceOf("GuzzleHttp\Psr7\Response", 'requestError', $error);
+        return $error;
+    }
+```
+
+2. Write code for setting a request error
+```php
+    function setRequestError($error)
+    {
+        if (!is_a($error, 'GuzzleHttp\Psr7\Response')) {
+            Throw new \BadMethodCallException('You must pass a valid Guzzle Http PSR7 Response');
+        }
+        $this->requestError = $error;
+        if (implode($this->requestError->getHeader('Content-Type')) !== 'text/html;charset=utf-8'){
+            $error_response = simplexml_load_string($this->requestError->getBody());
+            $this->code = (integer) $error_response->code;
+            $this->message = (string) $error_response->message;
+            $this->detail = (string) $error_response->detail;
+        } else {
+            $errorObject->code = (integer) $this->requestError->getStatusCode();
+        }
+        
+    }
+```
+
+#### Getting a Request Error
+1. Create Test for getting a request error
+```php
+    /**
+     * Get Request Error
+     * @depends testSetRequestError
+     */
+    function testGetRequestError($error){
+        $this->assertInstanceOf("GuzzleHttp\Psr7\Response", $error->getRequestError());
+        return $error;
+    }
+```
+
+2. Write code for getting a request error
+```php
+    function getRequestError()
+    {
+        return $this->requestError;
     }
 ```    
-7. Create function to retrieve error deail
+
+#### Get Code
+1. Create Test for getting error code
+```php
+    /**
+     * Get Code
+     * @depends testGetRequestError
+     */
+    function testGetCode($error) {
+        $this->assertEquals('401', $error->getCode());
+    }
+```
+2. Write code to make getCode test pass
+    1. Add variable for code
+    ```php
+    protected code;
+    ```
+    2. Create function to retrieve error code
+    ```php
+        function getCode() {
+            return $this->code;
+        }
+    ```
+
+#### Get Message
+1. Create a test for getting the error message
+```php
+    /**
+     * Get Message
+     * @depends testGetRequestError
+     */
+    function testGetMessage($error) {
+        $this->assertEquals('AccessToken {tk_12345} is invalid', $error->getMessage());
+    }
+```
+2. Write code to make getMessage test pass
+    1. Add variable for message
+    ```php
+    protected message;
+    ```
+    2. Create function to retrieve error message
+    ```php
+        function getMessage() {
+            return $this->message;
+        }
+    ```    
+
+#### Get Detail
+1. Create a test for getting the error detail
+```php
+    /**
+     * Get Detail
+     * @depends testGetRequestError
+     */
+    function testGetDetail($error) {
+        $this->assertEquals('Authorization header: Bearer tk_12345', $error->getDetail());
+    }
+```
+2. Write code to make getDetail test pass
+    1. Add variable for detail
+    ```php
+    protected detail;
+    ```
+    2. Create function to retrieve error deail
 ```php
     function getDetail() {
         return $this->detail;
     }
 ```
-8. Create static function to parse Error
-    1. Create a new BibError object
-    2. Make sure response is not HTML
-    3. Parse the XML response
-    4. Extract key field: code, message, detail
-    5. Return BibError object
+
+#### Test that an API error can be properly parsed
+1. Create test for parsing API error
+    1. Tell tests what file to use for mocks
+    2. Call Bib::find in a failed fashion
+    3. Test $error is an instance of BibError
+    4. Test the getCode() method returns 401
+    5. Test the getMessage() method returns AccessToken {tk_12345} is invalid
+    6. Test the getDetail() method returns Authorization header: Bearer tk_12345
+
 ```php
-   public static function parseError($error){ 
-        $errorObject = new BibError();
-        if (implode($error->getResponse()->getHeader('Content-Type')) !== 'text/html;charset=utf-8'){
-            $error_response = simplexml_load_string($error->getResponse()->getBody());
-            $errorObject->code = (integer) $error_response->code;
-            $errorObject->message = (string) $error_response->message;
-            $errorObject->detail = (string) $error_response->detail;
-        } else {
-            $errorObject->code = (integer) $error->getResponse()->getStatusCode();
-        }
-        return $errorObject;
-   }
-```   
+    /**
+     * @vcr failureInvalidAccessToken
+     * Invalid Access Token
+     */
+    function testErrorInvalidAccessToken(){
+        $error = Bib::find(70775700, $this->mockAccessToken);
+        $this->assertInstanceOf('BibError', $error);
+        $this->assertEquals('401', $error->getCode());
+        $this->assertEquals('AccessToken {tk_12345} is invalid', $error->getMessage());
+        $this->assertEquals('Authorization header: Bearer tk_12345', $error->getDetail());
+    }
+``` 
 
 **[on to Part 6](tutorial-06.md)**
 
