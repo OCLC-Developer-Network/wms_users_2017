@@ -14,11 +14,11 @@ $app->get('/bib[/{oclcnumber}]', function ($request, $response, $args){
 return $this->view->render($response, 'bib.html');
 ``` 
 4. Get the OCLC Number you want to look up. It can come from POSTED form data or the url
-    a. If the OCLC Number came in the url in $oclcnumber
-    b. If OCLC Number came in form data, if so store it in the $oclcnumber
-    c. Otherwise return an error page
-    d. If you have an OCLC Number, use the Bib class to find the record
-    e. check to make sure Bib is returned
+    1. If the OCLC Number came in the url in $oclcnumber
+    2. If OCLC Number came in form data, if so store it in the $oclcnumber
+    3. Otherwise return an error page
+    4. If you have an OCLC Number, use the Bib class to find the record
+    5. check to make sure Bib is returned
         - if so, return the bib record view. Pass Bib object to it as the bib variable
 ```php
     if (isset($args['oclcnumber'])){
