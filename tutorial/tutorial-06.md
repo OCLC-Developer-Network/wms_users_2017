@@ -55,19 +55,7 @@ prod:
         return Yaml::parse($config_file);
     };
     ```
-    d. Add the logging mechanism to the container as "logger"
-    - Create a new Monolog logger named "my_logger"
-    - Create a handler to write log info to a file
-    - Add handler for writing to file to Logger 
-    ```php
-    $container['logger'] = function($c) {
-        $logger = new \Monolog\Logger('my_logger');
-        $file_handler = new \Monolog\Handler\StreamHandler("../logs/app.log");
-        $logger->pushHandler($file_handler);
-        return $logger;
-    };
-    ```
-    e. Create a WSkey object and add it to the container as "wskey"
+    d. Create a WSkey object and add it to the container as "wskey"
     - Create an array of service name to request Access token for
     - Create an array of options to pass when creating a WSkey
     - Create a WSkey object using the wskey and secret value stored in the container, and the options array
@@ -79,14 +67,14 @@ prod:
         return new WSKey($c->get("config")['prod']['wskey'], $c->get("config")['prod']['secret'], $options);
     };
     ```
-    f. Create a user object and add it to the container as "user"
+    e. Create a user object and add it to the container as "user"
     - Create a user based on the institution, principalID and principalIDNS stored in the container
     ```php    
     $container['user'] = function ($c) {
         return new User($c->get("config")['prod']['institution'], $c->get("config")['prod']['principalID'], $c->get("config")['prod']['principalIDNS']);
     };
     ```
-    g. Create a View object and add it to the container as "view" 
+    f. Create a View object and add it to the container as "view" 
     - Create a Twig view
         - tell it where views are stored
         - tell it where views should be cached
