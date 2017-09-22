@@ -24,6 +24,7 @@ $ composer install
 	2. Open `.gitignore` in your text editor.
 	3. Copy and paste [this text](https://github.com/OCLC-Developer-Network/wms_users_2017/blob/master/.gitignore) into the file.
 		1. (This includes a few resources other than `/vendor/`, but we'll get to those later. :wink:)
+	4. Save the file.
 9. We're now ready to commit our changes to GitHub. To view local changes not yet commited, enter this command:
 	1. `$ git status`
 	2. This command should output text telling you that your composer.json and .gitignore files are not yet committed.
