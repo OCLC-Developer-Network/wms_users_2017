@@ -40,8 +40,19 @@
     </listeners>
   </phpunit>
 ```
-4. In tests directory create a file named bootstrap.php
-5. In the tests directory create a directory named mocks and add the mocks
+4. Populate the `tests` directory
+    1. Add a file called `getMocks.php` to the `tests` directory
+    2. Add [this code](https://raw.githubusercontent.com/OCLC-Developer-Network/wms_users_2017/master/tests/getMocks.php) to the file and save it.
+    3. Add a file called `mockBuilder.yml` to the `tests` directory
+    4. Add [this code](https://raw.githubusercontent.com/OCLC-Developer-Network/wms_users_2017/master/tests/mockBuilder.yml) to the file and save it.
+    5. Create a directory within `tests` called `mocks`
+    6. Add the following files to `mocks` containing the linked code
+        1. [bibSuccess](https://raw.githubusercontent.com/OCLC-Developer-Network/wms_users_2017/master/tests/mocks/bibSuccess)
+        2. [bibSuccessJournal](https://raw.githubusercontent.com/OCLC-Developer-Network/wms_users_2017/master/tests/mocks/bibSuccessJournal)
+        3. [failureExpiredAccessToken](https://raw.githubusercontent.com/OCLC-Developer-Network/wms_users_2017/master/tests/mocks/failureExpiredAccessToken)
+        4. [failureInvalidAccessToken](https://raw.githubusercontent.com/OCLC-Developer-Network/wms_users_2017/master/tests/mocks/failureInvalidAccessToken)
+        5. [marcRecord.xml](https://raw.githubusercontent.com/OCLC-Developer-Network/wms_users_2017/master/tests/mocks/marcRecord.xml)
+5. In tests directory create a file named bootstrap.php
 6. Require vendor autoload file
 ```php
     require_once __DIR__ . '/../vendor/autoload.php';
