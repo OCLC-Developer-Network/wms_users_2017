@@ -96,7 +96,10 @@
 ```
 6. Make the test pass by creating Bib class and constructor
     1. In the app/model directory create a file named Bib.php to represent the Bib Class
-    2. Open Bib.php and declare Bib class
+    2. Open Bib.php, declare Bib class and add use statements for class you want to use (WSKey and Access Token)
+    ```php
+        use GuzzleHttp\Client, GuzzleHttp\Exception\RequestException, GuzzleHttp\Psr7\Response;
+    ``` 
     3. Create a constructor for the Bib class
     ```php
         function __contruct() {
@@ -129,8 +132,12 @@ vendor/bin/phpunit
 ```
 
 6. Create a setRecord function in the Bib Class
-    1. Make sure the $record is a File_MARC_record object. Otherwise throw an Exception
-    2. Set record attribute equal to record value
+    1. Add variable for record
+    ```php
+    protected $record;
+    ```
+    2. Make sure the $record is a File_MARC_record object. Otherwise throw an Exception
+    3. Set record attribute equal to record value
 ```php
     public function setRecord($record){
         if (!is_a($record, 'File_MARC_Record')) {
@@ -187,21 +194,26 @@ vendor/bin/phpunit
         $this->assertEquals("70775700", $bib->getId());
     }
 ```
-2. Write function to get the Id in Bib class
-```php
-    public function getId()
-    {
-        if (empty($this->id)){
-            if (is_numeric($this->record->getField('001')->getData())) {
-                $this->id = $this->record->getField('001')->getData();
-            } else {
-             $this->id = substr($this->record->getField('001')->getData(), 3);
+2. Create code for handling Id
+    1. Add variable for id
+    ```php
+    protected $id;
+    ```
+    2. Write function to get the Id in Bib class
+    ```php
+        public function getId()
+        {
+            if (empty($this->id)){
+                if (is_numeric($this->record->getField('001')->getData())) {
+                    $this->id = $this->record->getField('001')->getData();
+                } else {
+                 $this->id = substr($this->record->getField('001')->getData(), 3);
+                }
+                
             }
-            
+            return $this->id;
         }
-        return $this->id;
-    }
-```
+    ```
 
 3. Run tests
 ```bash
@@ -548,7 +560,7 @@ vendor/bin/phpunit
 2. Write code to make getCode test pass
     1. Add variable for code
     ```php
-    protected code;
+    protected $code;
     ```
     2. Create function to retrieve error code
     ```php
@@ -571,7 +583,7 @@ vendor/bin/phpunit
 2. Write code to make getMessage test pass
     1. Add variable for message
     ```php
-    protected message;
+    protected $message;
     ```
     2. Create function to retrieve error message
     ```php
@@ -594,9 +606,9 @@ vendor/bin/phpunit
 2. Write code to make getDetail test pass
     1. Add variable for detail
     ```php
-    protected detail;
+    protected $detail;
     ```
-    2. Create function to retrieve error deail
+    2. Create function to retrieve error detail
 ```php
     function getDetail() {
         return $this->detail;
