@@ -59,6 +59,11 @@ class FeatureContext extends RawMinkContext implements Context
 #### Writing Tests
 1. Write a test for rendering the Search form
 ```
+Feature: View Search Form
+  As a library cataloger
+  I want to view the search form
+  so that search for an OCLC Number
+  
   Scenario: Successfully View Search form
     When I go to "/"
     Then I should see "Search by OCLC Number" in the "h1" element
@@ -68,6 +73,11 @@ class FeatureContext extends RawMinkContext implements Context
 ```    
 2. Write a test for submitting a Search via the form
 ```
+Feature: Submit Search Form
+  As a library cataloger
+  I want submit a search for an OCLC Number
+  so I can view the associated MARC record
+  
   Scenario: Successfully Submit Search
     When I go to "/"
     And I fill in "oclcnumber" with "70775700"
@@ -78,6 +88,11 @@ class FeatureContext extends RawMinkContext implements Context
 ```    
 3. Write a test for viewing a specific bibliographic record
 ```
+Feature: View Bib Record
+  As a library cataloger
+  I want to view a bib record
+  so that I can examine its properties
+  
   Scenario: Successfully View Bib
     When I go to "/bib/70775700"
     Then I should see "Dogs and cats" in the "div#content > h1" element
