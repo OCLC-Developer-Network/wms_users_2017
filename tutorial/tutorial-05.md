@@ -552,7 +552,7 @@ vendor/bin/phpunit
             $this->requestError = $error;
             if (implode($this->requestError->getHeader('Content-Type')) !== 'text/html;charset=utf-8'){
                 $error_response = simplexml_load_string($this->requestError->getBody());
-                $this->code = (integer) $error_response->code;
+                $this->code = (integer) $this->requestError->getStatusCode();
                 $this->message = (string) $error_response->message;
                 $this->detail = (string) $error_response->detail;
             } else {
@@ -561,6 +561,10 @@ vendor/bin/phpunit
             
         }
     ```
+3. Run tests
+```bash
+vendor/bin/phpunit
+```    
 
 #### Getting a Request Error
 1. Create Test for getting a request error
@@ -580,6 +584,10 @@ vendor/bin/phpunit
     {
         return $this->requestError;
     }
+```
+3. Run tests
+```bash
+vendor/bin/phpunit
 ```    
 
 #### Get Code
@@ -604,6 +612,10 @@ vendor/bin/phpunit
             return $this->code;
         }
     ```
+3. Run tests
+```bash
+vendor/bin/phpunit
+```       
 
 #### Get Message
 1. Create a test for getting the error message
@@ -626,7 +638,11 @@ vendor/bin/phpunit
         function getMessage() {
             return $this->message;
         }
-    ```    
+    ```
+3. Run tests
+```bash
+vendor/bin/phpunit
+```           
 
 #### Get Detail
 1. Create a test for getting the error detail
@@ -650,6 +666,10 @@ vendor/bin/phpunit
         return $this->detail;
     }
 ```
+3. Run tests
+```bash
+vendor/bin/phpunit
+```   
 
 #### Test that an API error can be properly parsed
 1. Create test for parsing API error
@@ -672,7 +692,11 @@ vendor/bin/phpunit
         $this->assertEquals('AccessToken {tk_12345} is invalid', $error->getMessage());
         $this->assertEquals('Authorization header: Bearer tk_12345', $error->getDetail());
     }
-``` 
+```
+2. Run tests
+```bash
+vendor/bin/phpunit
+```    
 
 **[on to Part 6](tutorial-06.md)**
 
