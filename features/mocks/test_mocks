@@ -2,7 +2,7 @@
 -
     request:
         method: POST
-        url: 'https://authn.sd00.worldcat.org/oauth2/accessToken?grant_type=authorization_code&code=auth_12384794&authenticatingInstitutionId=128807&contextInstitutionId=128807&redirect_uri=http%3A%2F%2Flocalhost%3A9090%2Fcatch_auth_code'
+        url: 'https://authn.sd00.worldcat.org/oauth2/accessToken?grant_type=client_credentials&authenticatingInstitutionId=128807&contextInstitutionId=128807&scope=WorldCatMetadataAPI'
         headers:
             Host: authn.sd00.worldcat.org
             Content-Length: '0'
