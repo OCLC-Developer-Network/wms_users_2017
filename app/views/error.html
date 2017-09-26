@@ -8,6 +8,9 @@
     {%if error_message %}
     <p id="message">Message - {{error_message}}</p>
     {% endif %}
+    {%if error_detail %}
+    <p id="detail">{{error_detail}}</p>
+    {% endif %}
     {%if oclcnumber %}
     <p id="oclcnumber">OCLC Number - {{oclcnumber}}</p>
     {% endif %}

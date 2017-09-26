@@ -33,6 +33,7 @@ $app->get('/bib[/{oclcnumber}]', function ($request, $response, $args){
 		return $this->view->render($response, 'error.html', [
 				'error' => $bib->getCode(),
 				'error_message' => $bib->getMessage(),
+				'error_detail' => $bib->getDetail(),
 				'oclcnumber' => $args['oclcnumber']
 		]);
 	}
