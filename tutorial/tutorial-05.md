@@ -486,6 +486,7 @@ vendor/bin/phpunit
     function testCreateBibError(){
         $error = new BibError();
         $this->assertInstanceOf('BibError', $error);
+        return $error;
     }
 ```
 6. Make the test pass by creating BibError class and constructor
