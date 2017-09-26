@@ -61,15 +61,10 @@ class BibError
 	    if (implode($this->requestError->getHeader('Content-Type')) !== 'text/html;charset=utf-8'){
 	        $error_response = simplexml_load_string($this->requestError->getBody());
 	        $this->code = (integer) $this->requestError->getStatusCode();
-	        if ($error_response->message) {
-	        	$this->message = (string) $error_response->message;
-	        } else {
-	        	$this->message = 'No message';
-	        }
+	        $this->message = (string) $error_response->message;
 	        $this->detail = (string) $error_response->detail;
 	    } else {
 	    	$this->code = (integer) $this->requestError->getStatusCode();
-	    	$this->message = 'html';
 	    }
 	    
 	}
