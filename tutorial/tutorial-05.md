@@ -55,6 +55,7 @@
 5. In tests directory create a file named bootstrap.php
 6. Require vendor autoload file
 ```php
+    <?php
     require_once __DIR__ . '/../vendor/autoload.php';
 ```
 7. Setup HTTP mocking
@@ -68,6 +69,7 @@
 1. In tests directory create a file named BibTest.php to test your Bib Class 
 2. Open BibTest.php and add use statements for class you want to use (WSKey and Access Token)
 ```php
+    <?php
     use OCLC\Auth\WSKey;
     use OCLC\Auth\AccessToken;
 ``` 
@@ -109,8 +111,12 @@
     1. In the app/model directory create a file named Bib.php to represent the Bib Class
     2. Open Bib.php, declare Bib class and add use statements for class you want to use (WSKey and Access Token)
     ```php
+        <?php
         use GuzzleHttp\Client, GuzzleHttp\Exception\RequestException, GuzzleHttp\Psr7\Response;
-    ``` 
+        
+        class Bib {
+    ```
+     
     3. Create a constructor for the Bib class
     ```php
         function __construct() {
@@ -460,6 +466,7 @@ vendor/bin/phpunit
 1. In tests directory create a file named BibErrorTest.php to test your BibError Class 
 2. Open BibErrorTest.php and add use statements for class you want to use (WSKey and Access Token)
 ```php
+    <?php
     use OCLC\Auth\WSKey;
     use OCLC\Auth\AccessToken;
     use GuzzleHttp\Psr7\Response;
@@ -500,6 +507,11 @@ vendor/bin/phpunit
 6. Make the test pass by creating BibError class and constructor
     1. In the app/model directory create a file named BibError.php to represent the BibError Class
     2. Open BibError.php and declare BibError class
+    ```php
+    <?php
+        class BibError {
+        }
+    ```
     3. Create a constructor for the BibError class
     ```php
         function __construct() {
@@ -526,24 +538,29 @@ vendor/bin/phpunit
 ```
 
 2. Write code for setting a request error
-```php
-    function setRequestError($error)
-    {
-        if (!is_a($error, 'GuzzleHttp\Psr7\Response')) {
-            Throw new \BadMethodCallException('You must pass a valid Guzzle Http PSR7 Response');
+    1. Create a variable for an requestError
+    ```php
+        protected $requestError;
+    ```
+    2. Create a function to set the requestError
+    ```php
+        function setRequestError($error)
+        {
+            if (!is_a($error, 'GuzzleHttp\Psr7\Response')) {
+                Throw new \BadMethodCallException('You must pass a valid Guzzle Http PSR7 Response');
+            }
+            $this->requestError = $error;
+            if (implode($this->requestError->getHeader('Content-Type')) !== 'text/html;charset=utf-8'){
+                $error_response = simplexml_load_string($this->requestError->getBody());
+                $this->code = (integer) $error_response->code;
+                $this->message = (string) $error_response->message;
+                $this->detail = (string) $error_response->detail;
+            } else {
+                $this->code = (integer) $this->requestError->getStatusCode();
+            }
+            
         }
-        $this->requestError = $error;
-        if (implode($this->requestError->getHeader('Content-Type')) !== 'text/html;charset=utf-8'){
-            $error_response = simplexml_load_string($this->requestError->getBody());
-            $this->code = (integer) $error_response->code;
-            $this->message = (string) $error_response->message;
-            $this->detail = (string) $error_response->detail;
-        } else {
-            $errorObject->code = (integer) $this->requestError->getStatusCode();
-        }
-        
-    }
-```
+    ```
 
 #### Getting a Request Error
 1. Create Test for getting a request error
