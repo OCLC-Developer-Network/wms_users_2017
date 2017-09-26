@@ -72,6 +72,14 @@ class BibTest extends \PHPUnit_Framework_TestCase
 	    $this->assertEquals("70775700", $bib->getId());
 	}
 	
+	function testGetNumericId() {
+		$bib = new Bib();
+		$records = new File_MARCXML(file_get_contents(__DIR__ . '/mocks/marcRecord2.xml'), File_MARC::SOURCE_STRING);
+		$record = $records->next();
+		$bib->setRecord($record);
+		$this->assertEquals("70775700", $bib->getId());
+	}
+	
 	/**
 	 * Get OCLCNumber
 	 * @depends testGetRecord
@@ -184,6 +192,16 @@ class BibTest extends \PHPUnit_Framework_TestCase
 	function testNoId()
 	{
 		$bib = Bib::find(null, $this->mockAccessToken);
+	}
+	
+	/**
+	 * @expectedException BadMethodCallException
+	 * @expectedExceptionMessage You must pass a valid File_MARC_Record
+	 */
+	function testBadMarc()
+	{
+		$bib = new Bib();
+		$bib->setRecord('junk');
 	}
 	
 }

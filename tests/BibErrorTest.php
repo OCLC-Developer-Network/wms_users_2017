@@ -57,6 +57,20 @@ class BibErrorTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
+     * Set Request Error HTML returned
+     * @depends testCreateBibError
+     */
+    function testSetRequestErrorHTML()
+    {
+    	$error = new BibError();
+    	$request_error = new Response(401, ['Content-Type' => 'text/html;charset=utf-8'], '<html></html>');
+    	$error->setRequestError($request_error);
+    	$this->assertAttributeInstanceOf("GuzzleHttp\Psr7\Response", 'requestError', $error);
+    	$this->assertAttributeEmpty('message', $error);
+    	$this->assertAttributeEmpty('detail', $error);
+    }
+    
+    /**
      * Get Request Error
      * @depends testSetRequestError
      */
@@ -111,5 +125,15 @@ class BibErrorTest extends \PHPUnit_Framework_TestCase
     	$this->assertEquals('401', $error->getCode());
     	$this->assertEquals('AccessToken {tk_12345} has expired', $error->getMessage());
     	$this->assertEquals('Authorization header: Bearer tk_12345', $error->getDetail());
+    }
+    
+    /**
+     * @expectedException BadMethodCallException
+     * @expectedExceptionMessage You must pass a valid Guzzle Http PSR7 Response
+     */
+    function testBadResponseObject()
+    {
+    	$error = new BibError();
+    	$error->setRequestError('junk');
     }
 }

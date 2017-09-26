@@ -64,7 +64,7 @@ class BibError
 	        $this->message = (string) $error_response->message;
 	        $this->detail = (string) $error_response->detail;
 	    } else {
-	        $errorObject->code = (integer) $this->requestError->getStatusCode();
+	    	$this->code = (integer) $this->requestError->getStatusCode();
 	    }
 	    
 	}
