@@ -113,7 +113,7 @@
     ``` 
     3. Create a constructor for the Bib class
     ```php
-        function __contruct() {
+        function __construct() {
         }
     ```   
 7. Run tests
@@ -496,7 +496,7 @@ vendor/bin/phpunit
     2. Open BibError.php and declare BibError class
     3. Create a constructor for the BibError class
     ```php
-        function __contruct() {
+        function __construct() {
         }
     ```   
 7. Run tests
@@ -551,8 +551,11 @@ vendor/bin/phpunit
         return $error;
     }
 ```
-
-2. Write code for getting a request error
+2. Add variable for request error
+```php
+protected $requestError;
+```
+3. Write code for getting a request error
 ```php
     function getRequestError()
     {
