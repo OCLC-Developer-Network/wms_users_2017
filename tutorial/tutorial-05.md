@@ -396,8 +396,11 @@ vendor/bin/phpunit
         }
     }
 ```
-
-6. Run tests
+6. Add `$serviceUrl` variable to Bib class 
+```php
+public static $serviceUrl = 'https://worldcat.org/bib/data/';
+```
+7. Run tests
 ```bash
 vendor/bin/phpunit
 ```
