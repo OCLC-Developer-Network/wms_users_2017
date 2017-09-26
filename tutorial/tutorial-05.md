@@ -351,12 +351,20 @@ vendor/bin/phpunit
     }
 ```
 5. Make test pass by creating a static "find" function for the Bib
-    1. Make sure a a valid OCLC Number is passed in
-    2. Make sure a valid Access Token is passed in
-    3. Create a url for the request
-    4. Create an HTTP client
-    5. Create an array of headers
-    6. try to make the HTTP request
+    1. Create a variable to hold the service url
+    ```php 
+        public static $serviceUrl = 'https://worldcat.org/bib/data/';
+    ```
+    2. Create a variable to hold the user agent
+    ```php 
+        public static $userAgent = 'OCLC DevConnect demo';
+    ``` 
+    3. Make sure a a valid OCLC Number is passed in
+    4. Make sure a valid Access Token is passed in
+    5. Create a url for the request
+    6. Create an HTTP client
+    7. Create an array of headers
+    8. try to make the HTTP request
         1. If successful
             1. Parse the response body XML
             2. Pull out MARC record string and use it to create a File_MARC_Record
@@ -396,11 +404,8 @@ vendor/bin/phpunit
         }
     }
 ```
-6. Add `$serviceUrl` variable to Bib class 
-```php
-public static $serviceUrl = 'https://worldcat.org/bib/data/';
-```
-7. Run tests
+
+9. Run tests
 ```bash
 vendor/bin/phpunit
 ```
