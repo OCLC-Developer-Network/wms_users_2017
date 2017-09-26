@@ -29,9 +29,9 @@ $app->get('/bib[/{oclcnumber}]', function ($request, $response, $args){
 				'bib' => $bib
 		]);
 	}else {
-		$this->logger->addInfo("API Call failed " . $bib->getStatus() . " " . $bib->getMessage());
+		$this->logger->addInfo("API Call failed " . $bib->getCode() . " " . $bib->getMessage());
 		return $this->view->render($response, 'error.html', [
-				'error' => $bib->getStatus(),
+				'error' => $bib->getCode(),
 				'error_message' => $bib->getMessage(),
 				'oclcnumber' => $args['oclcnumber']
 		]);

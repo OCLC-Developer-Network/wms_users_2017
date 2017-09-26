@@ -5,7 +5,9 @@
     <h1>System Error</h1>
     <div id="error_content">
     <p id="status">Status - {{error}}</p>
-    <p id="message">Message - {{error_description}}</p>
+    {%if error_message %}
+    <p id="message">Message - {{error_message}}</p>
+    {% endif %}
     {%if oclcnumber %}
     <p id="oclcnumber">OCLC Number - {{oclcnumber}}</p>
     {% endif %}
