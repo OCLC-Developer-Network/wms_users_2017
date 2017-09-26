@@ -574,11 +574,7 @@ vendor/bin/phpunit
         return $error;
     }
 ```
-2. Add variable for request error
-```php
-protected $requestError;
-```
-3. Write code for getting a request error
+2. Write code for getting a request error
 ```php
     function getRequestError()
     {
