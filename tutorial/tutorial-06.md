@@ -20,7 +20,7 @@ prod:
     - principalID
     - principalIDNS
     - institution registry ID
-This file should follow the same format as config.yml above, but with your actual credentials.
+    - This file should follow the same format as config.yml above, but with your actual credentials.
 ```php
 prod:
     wskey: test
