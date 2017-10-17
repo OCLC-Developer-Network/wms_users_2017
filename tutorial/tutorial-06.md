@@ -4,14 +4,7 @@
 
 #### Configuration
 1. In app directory create a config directory
-2. In app/config create file config.yml
-3. Edit config.yml so it contains a set of key value pairs with:
-    - wskey key
-    - wskey secret
-    - principalID
-    - principalIDNS
-    - institution registry ID
-	
+1. In app/config create file test_config.yml containing this text:
 ```php
 prod:
     wskey: test
@@ -20,6 +13,27 @@ prod:
     principalIDNS: namespace
     institution: 128807
 ```
+2. In app/config create file config.yml
+3. Edit config.yml so it contains a set of key value pairs with:
+    - wskey key
+    - wskey secret
+    - principalID
+    - principalIDNS
+    - institution registry ID
+    1. This file should follow the same format as config.yml above, but with your actual credentials.
+```php
+prod:
+    wskey: test
+    secret: secret
+    principalID: id 
+    principalIDNS: namespace
+    institution: 128807
+```
+1. Add a .gitignore file to app/config containing the following text:
+```php
+/config.yml
+```
+    1. This tells Git not to add the file containing your credentials to your (potentially public) repository.
 4. In app directory create a file name settings.php. This will store your application settings like whether or not to display errors
 ```php
     return [
